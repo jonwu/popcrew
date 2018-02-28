@@ -1,0 +1,159 @@
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  FlatList,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { generateStylesSelector } from '../app/utils/selectors';
+
+function generateStyles(theme) {
+  return {};
+}
+class CreateEvent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+      selectedOptions: [],
+    };
+  }
+
+  render() {
+    const { gstyles, theme, styles } = this.props;
+    const { selectedOptions } = this.state;
+    const options = [
+      { value: 'Monday', key: 'monday' },
+      { value: 'Tuesday', key: 'tuesday' },
+      { value: 'Wednesday', key: 'wednesday' },
+      { value: 'Thursday', key: 'thursday' },
+      { value: 'Friday', key: 'friday' },
+      { value: 'Saturday', key: 'saturday' },
+      { value: 'Sunday', key: 'sunday' },
+      { value: 'Any day', key: 'all' },
+    ];
+    return (
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={{ height: 50 }} />
+        <TextInput
+          style={[
+            gstyles.p1,
+            gstyles.bottom_2,
+            {
+              paddingHorizontal: theme.spacing_2,
+              borderBottomWidth: theme.borderWidth,
+              borderColor: theme.borderColor,
+              height: 50,
+            },
+          ]}
+          multiline
+          maxLength={180}
+          onChangeText={text => this.setState({ text })}
+          returnKeyType={'done'}
+          placeholder={'Got something you wanna do?'}
+          placeholderTextColor={theme.text(0.5)}
+          value={this.state.text}
+        />
+        <View style={{ paddingHorizontal: theme.spacing_2 }}>
+          <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_3]}>What days?</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {options.map((option, i) => {
+              const hasOption = selectedOptions.find(
+                selectedOption => selectedOption.key === option.key,
+              );
+              const isAll = selectedOptions.length === options.length - 1;
+              return (
+                <TouchableWithoutFeedback
+                  key={i}
+                  onPress={() => {
+                    let updatedSelectedOptions;
+                    switch (option.key) {
+                      case 'all': {
+                        updatedSelectedOptions = isAll
+                          ? []
+                          : options.filter(option => option.key !== 'all');
+                        break;
+                      }
+                      default: {
+                        if (hasOption) {
+                          updatedSelectedOptions = selectedOptions.filter(
+                            selectedOption => selectedOption.key !== option.key,
+                          );
+                        } else {
+                          updatedSelectedOptions = [...selectedOptions, option];
+                        }
+                        break;
+                      }
+                    }
+                    this.setState({ selectedOptions: updatedSelectedOptions });
+                  }}
+                >
+                  <View
+                    style={[
+                      {
+                        flexDirection: 'row',
+                        height: 32,
+                        alignItems: 'center',
+                        borderRadius: theme.borderRadius,
+                        overflow: 'hidden',
+                        backgroundColor: theme.text(0.1),
+                      },
+                      gstyles.right_4,
+                      gstyles.bottom_4,
+                    ]}
+                  >
+                    <View
+                      style={{
+                        width: 32,
+                        backgroundColor: hasOption || isAll ? theme.yellow() : theme.text(0.1),
+                        alignSelf: 'stretch',
+                      }}
+                    />
+                    <Text
+                      style={[
+                        gstyles.caption_bold,
+                        { paddingHorizontal: theme.spacing_3, color: hasOption || isAll ? theme.text(0.8) : theme.text(0.5) },
+                      ]}
+                    >
+                      {option.value}
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              );
+            })}
+          </View>
+        </View>
+        <View style={{ flex: 1 }}/>
+        {this.state.text.trim() !== '' && this.state.selectedOptions.length > 0 && (
+          <TouchableOpacity
+            onPress={Actions.selectUsers}
+            >
+            <View style={{ flexDirection: 'row', backgroundColor: theme.blue(0.8), alignItems: 'center'}}>
+              <View style={{flex: 1}} />
+              <View style={{padding: theme.spacing_2, backgroundColor: theme.blue()}}>
+                <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
+  }
+}
+
+const stylesSelector = generateStylesSelector(generateStyles);
+function mapStateToProps(state, ownProps) {
+  return {
+    theme: state.settings.light_theme,
+    gstyles: state.settings.light_gstyles,
+    styles: stylesSelector(state.settings.light_theme),
+  };
+}
+
+export default connect(mapStateToProps)(CreateEvent);

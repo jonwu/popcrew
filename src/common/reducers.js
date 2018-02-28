@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import settings from './app';
+import app from './app';
 
 const reducers = combineReducers({
-  settings: settings.settings,
+  settings: app.settings,
+  app: app.reducer,
 });
 
 export default reducers;

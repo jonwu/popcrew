@@ -4,6 +4,8 @@ import thunk from 'redux-thunk';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web and AsyncStorage for react-native
 import rootReducer from './reducers';
+import collections from './utils/themes';
+import gstyles from './utils/gstyles';
 
 const transform = createTransform(
   (inboundState, key) => {

@@ -174,5 +174,11 @@ export default theme => {
       marginTop: -4,
       transform: 'rotate(-225deg)',
     },
+    border: {
+      borderRadius: theme.borderRadius,
+      borderColor: theme.borderColor,
+      borderWidth: theme.borderWidth,
+      borderStyle: 'solid',
+    }
   };
 };
