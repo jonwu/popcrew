@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import BackendAPI from '../../common/api/BackendApi';
 
 function generateStyles(theme) {
   return {};
@@ -14,13 +15,24 @@ class SelectedUsers extends Component {
     this.state = {
       selectedUsers: [],
     };
+    this.onShare = this.onShare.bind(this);
+  }
+  onShare() {
+    const { selectedOptions, text } = this.props;
+    const { selectedUsers } = this.state;
+    const valid_days = selectedOptions.map(options => options.key).join(',');
+    const users = selectedUsers.map(user => user._id).join(',');
+    const name = text;
+    BackendAPI.postEvents({name, valid_days, users}).then(event => {
+      console.log(event);
+    })
+
   }
   render() {
     const { gstyles, theme, styles, users } = this.props;
     const { selectedUsers } = this.state;
-    console.log(users)
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={users}
           keyExtractor={(item, i) => item._id}
@@ -61,17 +73,30 @@ class SelectedUsers extends Component {
         />
         <View style={{ flex: 1 }} />
         {selectedUsers.length > 0 && (
-          <View style={{ flexDirection: 'row', padding: theme.spacing_2, backgroundColor: theme.red(), alignItems: 'center'}}>
-            <FlatList
-              horizontal
-              keyExtractor={(item, i) => item._id}
-              data={selectedUsers}
-              renderItem={({ item }) => <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>{item.name}</Text>}
-              ItemSeparatorComponent={() => <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>, </Text>}
-            />
-            <View style={{flex: 1}} />
-            <Text style={[gstyles.h4_bold, { color: theme.light() }, gstyles.left_2]}>SHARE</Text>
-          </View>
+          <TouchableOpacity onPress={this.onShare}>
+            <View
+              style={{
+                flexDirection: 'row',
+                padding: theme.spacing_2,
+                backgroundColor: theme.red(),
+                alignItems: 'center',
+              }}
+            >
+              <FlatList
+                horizontal
+                keyExtractor={(item, i) => item._id}
+                data={selectedUsers}
+                renderItem={({ item }) => (
+                  <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>{item.name}</Text>
+                )}
+                ItemSeparatorComponent={() => (
+                  <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>, </Text>
+                )}
+              />
+              <View style={{ flex: 1 }} />
+              <Text style={[gstyles.h4_bold, { color: theme.light() }, gstyles.left_2]}>SHARE</Text>
+            </View>
+          </TouchableOpacity>
         )}
       </View>
     );

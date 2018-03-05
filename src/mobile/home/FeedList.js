@@ -20,8 +20,9 @@ class FeedList extends Component {
       <FlatList
         // data={[{ key: 'Play Basketball', bg: theme.red() }, { key: 'Boardgame Night!!', bg: theme.blue() }]}
         data={events}
+        numColumns={2}
         keyExtractor={(item) => item._id}
-        renderItem={({ item }) => <InvitationItem item={item} />}
+        renderItem={({ item, index }) => <InvitationItem item={item} index={index}/>}
         ItemSeparatorComponent={() => <View style={{height: theme.spacing_2}}/>}
         ListHeaderComponent={() => <View style={gstyles.bottom_2}><FeedHeader/></View> }
       />

@@ -8,6 +8,7 @@ import { TabIcon } from './components';
 import Home from '../home/Home';
 import CreateEvent from '../create/CreateEvent';
 import SelectUsers from '../create/SelectUsers';
+import Login from '../registration/Login';
 
 function generateStyles(theme) {
   return {};
@@ -21,6 +22,7 @@ class Root extends Component {
     return (
       <Router>
         <Stack key="root">
+          <Scene key="login" component={Login} hideNavBar/>
           <Tabs
             key="tabbar"
             swipeEnabled
@@ -31,8 +33,8 @@ class Root extends Component {
           >
             <Stack key="homeTab" title="home" icon={TabIcon}>
               {/* <Scene key="createEvent" component={CreateEvent} hideNavBar/> */}
-              {/* <Scene key="home" component={Home} hideNavBar/> */}
-              <Scene key="selectUsers" component={SelectUsers} hideNavBar/>
+              <Scene key="home" component={Home} hideNavBar/>
+              {/* <Scene key="selectUsers" component={SelectUsers} hideNavBar/> */}
             </Stack>
             <Stack key="eventsTab" title="events" icon={TabIcon}>
               <Scene key="home" component={Home} hideNavBar/>

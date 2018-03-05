@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		3z1fCHqxrAWfiz35IVSlWOIHayA=
+		YL+3BmKc5GyTr01bwcfYVQn0UHY=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -243,7 +243,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		lwGzs9O9jKsFpvf4JyAWkP6FmHc=
+		Nl+u4xZW0tSgtYBSiUZMyV7COmQ=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -275,15 +275,15 @@
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/Info.plist</key>
 		<data>
-		ZMIImhJ3Ki/C+VOqwMmesCiTh8c=
+		IDrSgbrD8JDaItYYoSOXE2uWOsU=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/PopcrewTests</key>
 		<data>
-		vhHjFC5SrnkMojOFQNwlUiYK1Xo=
+		iJXzdWEmNPgGtaFQKW6kJ7kOJRM=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		z0qmPGL0BuUBfP5MvSumysf01U8=
+		xpQ/vmZWItHtskiBVjD0gc/v9h4=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -300,11 +300,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3z1fCHqxrAWfiz35IVSlWOIHayA=
+			YL+3BmKc5GyTr01bwcfYVQn0UHY=
 			</data>
 			<key>hash2</key>
 			<data>
-			YqhrHDb1/D/wL/mhr3r0dyr/WsWoIwWNo9nlr4A+RaQ=
+			ZWIaym8UGYJlxV4dev30cDAUw/hqosEUjNKV2hmqM9k=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -1006,33 +1006,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZMIImhJ3Ki/C+VOqwMmesCiTh8c=
+			IDrSgbrD8JDaItYYoSOXE2uWOsU=
 			</data>
 			<key>hash2</key>
 			<data>
-			BgYawRi/jQH1MxL6RG6S6CoZAbjxWMnCtIR1SDpRDJ8=
+			n6bY9a9hLYfPqKDup8EKIqRy/cpJwtdcqDkMZK+DFYo=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/PopcrewTests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vhHjFC5SrnkMojOFQNwlUiYK1Xo=
+			iJXzdWEmNPgGtaFQKW6kJ7kOJRM=
 			</data>
 			<key>hash2</key>
 			<data>
-			0/h0oQ+8DBEpr0vTClnSIpyJQCd3BFOisCrmLxQvHvQ=
+			1HRAMAR3EzSBQfWeE8mZvEG9zgwKNBdx083H0hJ5hwo=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			z0qmPGL0BuUBfP5MvSumysf01U8=
+			xpQ/vmZWItHtskiBVjD0gc/v9h4=
 			</data>
 			<key>hash2</key>
 			<data>
-			f15nNatSAYIdViXNcD5aS5wQOnfWpe9SilqtjTWkk5w=
+			5Q2kDYL3GyDQMrkw3HCmKxBOop6yMQ/7TTNi986thuc=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>

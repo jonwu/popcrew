@@ -12,20 +12,22 @@ class InvitationItem extends Component {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles, item } = this.props;
+    const { gstyles, theme, styles, item, index } = this.props;
     return (
       <View
         style={{
+          flex: 1,
           backgroundColor: theme.red(),
           padding: theme.spacing_2,
           borderRadius: theme.borderRadius,
+          marginRight: index % 2 == 0 ? theme.spacing_2 : 0,   
         }}
       >
         <Text style={[gstyles.h4_bold, gstyles.bottom_3]}>{item.name}</Text>
         <FlatList
           horizontal
           data={[{ key: 'JW' }, { key: 'HG' }]}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <View
               style={{
                 height: 48,

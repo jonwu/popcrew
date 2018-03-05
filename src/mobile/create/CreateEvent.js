@@ -27,7 +27,7 @@ class CreateEvent extends Component {
 
   render() {
     const { gstyles, theme, styles } = this.props;
-    const { selectedOptions } = this.state;
+    const { selectedOptions, text } = this.state;
     const options = [
       { value: 'Monday', key: 'monday' },
       { value: 'Tuesday', key: 'tuesday' },
@@ -39,7 +39,7 @@ class CreateEvent extends Component {
       { value: 'Any day', key: 'all' },
     ];
     return (
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ flex: 1, backgroundColor: theme.bg() }}>
         <View style={{ height: 50 }} />
         <TextInput
           style={[
@@ -58,7 +58,7 @@ class CreateEvent extends Component {
           returnKeyType={'done'}
           placeholder={'Got something you wanna do?'}
           placeholderTextColor={theme.text(0.5)}
-          value={this.state.text}
+          value={text}
         />
         <View style={{ paddingHorizontal: theme.spacing_2 }}>
           <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_3]}>What days?</Text>
@@ -132,9 +132,11 @@ class CreateEvent extends Component {
         <View style={{ flex: 1 }}/>
         {this.state.text.trim() !== '' && this.state.selectedOptions.length > 0 && (
           <TouchableOpacity
-            onPress={Actions.selectUsers}
+            onPress={() => {
+              Actions.selectUsers({text, selectedOptions})
+            }}
             >
-            <View style={{ flexDirection: 'row', backgroundColor: theme.blue(0.8), alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', backgroundColor: theme.blue(), alignItems: 'center'}}>
               <View style={{flex: 1}} />
               <View style={{padding: theme.spacing_2, backgroundColor: theme.blue()}}>
                 <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
@@ -150,8 +152,8 @@ class CreateEvent extends Component {
 const stylesSelector = generateStylesSelector(generateStyles);
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.settings.light_theme,
-    gstyles: state.settings.light_gstyles,
+    theme: state.settings.theme,
+    gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.light_theme),
   };
 }

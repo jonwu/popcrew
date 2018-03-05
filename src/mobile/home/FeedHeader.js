@@ -12,7 +12,7 @@ function generateStyles(theme) {
 class FeedHeader extends Component {
   constructor(props) {
     super(props);
-    
+
   }
   render() {
     const { gstyles, theme, styles } = this.props;
@@ -21,7 +21,7 @@ class FeedHeader extends Component {
         onPress={Actions.createEvent}
         style={{ paddingVertical: theme.spacing_1 }}
       >
-        <Text style={[gstyles.h1, { color: theme.text(0.5) }]}>
+        <Text style={[gstyles.h1_bold, { color: theme.text(0.5) }]}>
           Got something{'\n'}you wanna do?{'\n'}
           {'\n'}
         </Text>
