@@ -24,5 +24,18 @@ class API {
   getUsers(params) {
     return instance.get(`/users`, { params });
   }
+  getUser(params, userId) {
+    return instance.get(`/users/${userId}`, { params });
+  }
+  signIn(params) {
+    return instance.get(`/signIn`, { params });
+  }
+  postUser(params) {
+    return instance.get(`/users`, { params });
+  }
+  getInvitations(params) {
+    return instance.get(`/invitations`, { params });
+  }
+
 }
 export default new API();

@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 function generateStyles(theme) {
   return {}
 }
-class Home extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isSignUp: true;
+    }
   }
   render() {
     const { gstyles, theme, styles } = this.props;
+    const { isSignUp } = this.state;
     return (
-      <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
-        
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        {isSignUp ? <SignUp/> : <SignIn/>}
+        <TouchableOpacity onPress={() => this.setState({isSignUp: !this.state.isSignUp})}>
+          <Text>{isSignUp ? "Got an account? Sign in" : "Go back to sign up"}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -33,4 +41,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-)(Home);
+  { signIn }
+)(Registration);

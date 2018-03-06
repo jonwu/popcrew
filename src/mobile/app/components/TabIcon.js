@@ -20,6 +20,8 @@ class TabIcon extends Component {
         return <View style={{height: 20, width: 20, borderRadius: 20, backgroundColor: focused ? theme.yellow() : theme.text(0.1)}}/>
       case 'events':
         return <View style={{height: 20, width: 20, borderRadius: theme.borderRadius, backgroundColor: focused ? theme.blue() : theme.text(0.1)}}/>
+      case 'invitations':
+        return <View style={{height: 20, width: 20, borderRadius: theme.borderRadius, backgroundColor: focused ? theme.yellow() : theme.text(0.1)}}/>
       default:
         return null;
     }

@@ -17,7 +17,16 @@ function events(state = [], action) {
       return state;
   }
 }
+function invitations(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_INVITATIONS:
+      return action.invitations;
+    default:
+      return state;
+  }
+}
 export default combineReducers({
   users,
   events,
+  invitations,
 })

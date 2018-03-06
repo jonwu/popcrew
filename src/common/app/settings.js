@@ -44,6 +44,14 @@ function light_gstyles(state = generateStyles(collections[0]), action) {
   }
 }
 
+function user(state = null, action) {
+  switch (action.type) {
+    case ActionTypes.SAVE_USER:
+      return action.user,
+    default:
+      return state;
+  }
+}
 export default combineReducers({
   theme,
   dark_theme,
@@ -51,4 +59,5 @@ export default combineReducers({
   gstyles,
   dark_gstyles,
   light_gstyles,
+  user,
 });

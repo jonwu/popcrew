@@ -2,23 +2,21 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { generateStylesSelector } from '../app/utils/selectors';
-
+import { generateStylesSelector } from '../utils/selectors';
 
 function generateStyles(theme) {
   return {}
 }
-class Home extends Component {
+class Loader extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles } = this.props;
-    return (
-      <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
-        
-      </View>
-    );
+    const { loader } = this.props;
+    if (loader.isRequesting) return <Text>Loading</Text>
+    if (loader.isReceived) return this.props.children;
+    if (loader.error && onError) return onError(loader.error);
+    return null;
   }
 }
 
@@ -33,4 +31,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-)(Home);
+)(Loader);

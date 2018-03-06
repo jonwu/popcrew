@@ -8,7 +8,9 @@ import { TabIcon } from './components';
 import Home from '../home/Home';
 import CreateEvent from '../create/CreateEvent';
 import SelectUsers from '../create/SelectUsers';
-import Login from '../registration/Login';
+import Registration from '../registration/Registration';
+import Events from '../events/Events';
+import Invitations from '../invitations/Invitations';
 
 function generateStyles(theme) {
   return {};
@@ -18,13 +20,13 @@ class Root extends Component {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles } = this.props;
+    const { gstyles, theme, styles, user } = this.props;
     return (
       <Router>
         <Stack key="root">
-          <Scene key="login" component={Login} hideNavBar/>
+          <Scene key="registration" component={Registration} onEnter={() => if (user) Actions.app()} hideNavBar/>
           <Tabs
-            key="tabbar"
+            key="app"
             swipeEnabled
             showLabel={false}
             activeBackgroundColor={theme.bg()}
@@ -32,18 +34,17 @@ class Root extends Component {
             tabStyle={{ marginTop: -1 }}
           >
             <Stack key="homeTab" title="home" icon={TabIcon}>
-              {/* <Scene key="createEvent" component={CreateEvent} hideNavBar/> */}
               <Scene key="home" component={Home} hideNavBar/>
-              {/* <Scene key="selectUsers" component={SelectUsers} hideNavBar/> */}
             </Stack>
             <Stack key="eventsTab" title="events" icon={TabIcon}>
-              <Scene key="home" component={Home} hideNavBar/>
+              <Scene key="events" component={Events} hideNavBar/>
+            </Stack>
+            <Stack key="invitationsTab" title="invitations" icon={TabIcon}>
+              <Scene key="invitations" component={Invitations} hideNavBar/>
             </Stack>
           </Tabs>
           <Scene key="createEvent" component={CreateEvent} hideNavBar/>
           <Scene key="selectUsers" component={SelectUsers} hideNavBar/>
-
-
         </Stack>
       </Router>
     );
@@ -56,6 +57,7 @@ function mapStateToProps(state, ownProps) {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
+    user: state.settings.user,
   };
 }
 
