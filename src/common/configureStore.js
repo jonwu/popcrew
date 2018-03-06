@@ -41,5 +41,6 @@ const enhancer = composeWithDevTools(applyMiddleware(thunk));
 export default initialState => {
   let store = createStore(persistedReducer, initialState, enhancer);
   let persistor = persistStore(store);
+  // persistor.purge();
   return { store, persistor };
 };

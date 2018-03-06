@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import { Loader } from '../app/components';
 import InvitationList from './InvitationList';
+import { initInvitations } from '../../common/app/actions';
 
 function generateStyles(theme) {
   return {}

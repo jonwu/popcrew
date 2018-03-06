@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
@@ -17,7 +17,7 @@ class SignUp extends Component {
       firstname: '',
       lastname: '',
     }
-    this.signUp = this.signUp.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
   }
   onSignUp() {
     const { signUp } = this.props;
@@ -29,9 +29,9 @@ class SignUp extends Component {
     const { username, firstname, lastname } = this.state;
     return (
       <View>
-        <TextInput maxLength={100} value={username} onChangeText={username => this.setState({ username })}/>
-        <TextInput maxLength={100} value={firstname} onChangeText={firstname => this.setState({ firstname })}/>
-        <TextInput maxLength={100} value={lastname} onChangeText={lastname => this.setState({ lastname })}/>
+        <TextInput placeholder="username" maxLength={100} value={username} onChangeText={username => this.setState({ username })}/>
+        <TextInput placeholder="firstname" maxLength={100} value={firstname} onChangeText={firstname => this.setState({ firstname })}/>
+        <TextInput placeholder="lastname" maxLength={100} value={lastname} onChangeText={lastname => this.setState({ lastname })}/>
         <TouchableOpacity onPress={this.onSignUp}><Text>Sign Up</Text></TouchableOpacity>
       </View>
     );

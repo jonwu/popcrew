@@ -59,7 +59,7 @@ class SelectedUsers extends Component {
                   }}
                 >
                   <Text style={[gstyles.h4, { color: hasUserKey ? theme.red() : theme.text() }]}>
-                    {item.name}
+                    {item.username}
                   </Text>
                   <View style={{ flex: 1 }} />
                   {hasUserKey && <Icon name="check-circle" size={24} color={theme.red()} />}
@@ -87,7 +87,7 @@ class SelectedUsers extends Component {
                 keyExtractor={(item, i) => item._id}
                 data={selectedUsers}
                 renderItem={({ item }) => (
-                  <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>{item.name}</Text>
+                  <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>{item.username}</Text>
                 )}
                 ItemSeparatorComponent={() => (
                   <Text style={[gstyles.p1_bold, { color: theme.light(0.8) }]}>, </Text>

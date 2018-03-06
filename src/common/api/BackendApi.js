@@ -6,7 +6,7 @@ const instance = axios.create({ timeout: 10000, baseURL: URL });
 
 instance.interceptors.request.use((i_config) => {
   if (process.env.NODE_ENV !== 'production') {
-    // // console.log(`\n(${i_config.method.toUpperCase()}) ${i_config.url} ${i_config.params ? JSON.stringify(i_config.params) : JSON.stringify(i_config.data)}`);
+    console.log(`\n(${i_config.method.toUpperCase()}) ${i_config.url} ${i_config.params ? JSON.stringify(i_config.params) : JSON.stringify(i_config.data)}`);
   }
   return i_config;
 }, (error) => {
@@ -21,6 +21,9 @@ class API {
   postEvents(params) {
     return instance.post(`/events`, params);
   }
+  postUser(params) {
+    return instance.post(`/users`, params);
+  }
   getUsers(params) {
     return instance.get(`/users`, { params });
   }
@@ -30,9 +33,7 @@ class API {
   signIn(params) {
     return instance.get(`/signIn`, { params });
   }
-  postUser(params) {
-    return instance.get(`/users`, { params });
-  }
+
   getInvitations(params) {
     return instance.get(`/invitations`, { params });
   }

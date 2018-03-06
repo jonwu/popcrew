@@ -47,7 +47,7 @@ function light_gstyles(state = generateStyles(collections[0]), action) {
 function user(state = null, action) {
   switch (action.type) {
     case ActionTypes.SAVE_USER:
-      return action.user,
+      return action.user;
     default:
       return state;
   }

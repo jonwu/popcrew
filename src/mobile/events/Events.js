@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import { Loader } from '../app/components';
 import EventList from './EventList';
+import { initEvents } from '../../common/app/actions';
 
 function generateStyles(theme) {
   return {}
@@ -19,6 +20,7 @@ class Events extends Component {
   }
   render() {
     const { gstyles, theme, styles, loaderInitEvents } = this.props;
+    console.log(loaderInitEvents);
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
         <Loader loader={loaderInitEvents} >

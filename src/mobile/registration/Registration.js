@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
+
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 
@@ -13,7 +14,7 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSignUp: true;
+      isSignUp: true,
     }
   }
   render() {
@@ -41,5 +42,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { signIn }
 )(Registration);

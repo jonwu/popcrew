@@ -24,7 +24,7 @@ class Root extends Component {
     return (
       <Router>
         <Stack key="root">
-          <Scene key="registration" component={Registration} onEnter={() => if (user) Actions.app()} hideNavBar/>
+          <Scene key="registration" component={Registration} onEnter={() => user && Actions.app()} hideNavBar/>
           <Tabs
             key="app"
             swipeEnabled
@@ -34,7 +34,7 @@ class Root extends Component {
             tabStyle={{ marginTop: -1 }}
           >
             <Stack key="homeTab" title="home" icon={TabIcon}>
-              <Scene key="home" component={Home} hideNavBar/>
+              <Scene key="home" component={CreateEvent} hideNavBar/>
             </Stack>
             <Stack key="eventsTab" title="events" icon={TabIcon}>
               <Scene key="events" component={Events} hideNavBar/>
