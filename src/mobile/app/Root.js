@@ -34,7 +34,7 @@ class Root extends Component {
             tabStyle={{ marginTop: -1 }}
           >
             <Stack key="homeTab" title="home" icon={TabIcon}>
-              <Scene key="home" component={CreateEvent} hideNavBar/>
+              <Scene key="home" component={Home} hideNavBar/>
             </Stack>
             <Stack key="eventsTab" title="events" icon={TabIcon}>
               <Scene key="events" component={Events} hideNavBar/>

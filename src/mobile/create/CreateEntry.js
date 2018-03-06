@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function generateStyles(theme) {
   return {};
 }
-class FeedHeader extends Component {
+class CreateEntry extends Component {
   constructor(props) {
     super(props);
 
@@ -35,12 +35,10 @@ class FeedHeader extends Component {
           <View style={{ flex: 1 }} />
           <Icon name="chevron-circle-right" size={48} color={theme.yellow()} />
         </View>
-
       </TouchableOpacity>
     );
   }
 }
-
 const stylesSelector = generateStylesSelector(generateStyles);
 function mapStateToProps(state, ownProps) {
   return {
@@ -49,5 +47,4 @@ function mapStateToProps(state, ownProps) {
     styles: stylesSelector(state.settings.theme),
   };
 }
-
-export default connect(mapStateToProps)(FeedHeader);
+export default connect(mapStateToProps)(CreateEntry);

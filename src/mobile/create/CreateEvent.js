@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
+import PendingList from '../pending/PendingList';
 
 function generateStyles(theme) {
   return {};
@@ -130,6 +131,7 @@ class CreateEvent extends Component {
           </View>
         </View>
         <View style={{ flex: 1 }}/>
+        {/* <PendingList /> */}
         {this.state.text.trim() !== '' && this.state.selectedOptions.length > 0 && (
           <TouchableOpacity
             onPress={() => {
@@ -154,7 +156,7 @@ function mapStateToProps(state, ownProps) {
   return {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
-    styles: stylesSelector(state.settings.light_theme),
+    styles: stylesSelector(state.settings.theme),
   };
 }
 

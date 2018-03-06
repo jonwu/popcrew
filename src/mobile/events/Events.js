@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import { Loader } from '../app/components';
 import EventList from './EventList';
-import { initEvents } from '../../common/app/actions';
+import { initActiveEvents } from '../../common/app/actions';
 
 function generateStyles(theme) {
   return {}
@@ -15,15 +15,15 @@ class Events extends Component {
     super(props);
   }
   componentDidMount() {
-    const { user, initEvents } = this.props;
-    initEvents({ userId: user._id });
+    const { user, initActiveEvents } = this.props;
+    initActiveEvents({ userId: user._id });
   }
   render() {
-    const { gstyles, theme, styles, loaderInitEvents } = this.props;
-    console.log(loaderInitEvents);
+    const { gstyles, theme, styles, loaderInitActiveEvents } = this.props;
+    console.log(loaderInitActiveEvents);
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
-        <Loader loader={loaderInitEvents} >
+        <Loader loader={loaderInitActiveEvents} >
           <EventList />
         </Loader>
       </View>
@@ -38,11 +38,11 @@ function mapStateToProps(state, ownProps) {
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
     user: state.settings.user,
-    loaderInitEvents: state.loading.init_events,
+    loaderInitActiveEvents: state.loading.init_active_events,
   };
 }
 
 export default connect(
   mapStateToProps,
-  { initEvents }
+  { initActiveEvents }
 )(Events);

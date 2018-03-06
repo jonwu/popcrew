@@ -9,9 +9,17 @@ function users(state = [], action) {
       return state;
   }
 }
-function events(state = [], action) {
+function activeEvents(state = [], action) {
   switch (action.type) {
-    case ActionTypes.UPDATE_EVENTS:
+    case ActionTypes.UPDATE_ACTIVE_EVENTS:
+      return action.events;
+    default:
+      return state;
+  }
+}
+function idleEvents(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_IDLE_EVENTS:
       return action.events;
     default:
       return state;
@@ -27,6 +35,7 @@ function invitations(state = [], action) {
 }
 export default combineReducers({
   users,
-  events,
+  activeEvents,
+  idleEvents,
   invitations,
 })

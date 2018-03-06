@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-
+import PendingList from '../pending/PendingList';
 
 function generateStyles(theme) {
   return {}
@@ -15,8 +15,8 @@ class Home extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
-        
+      <View style={{ flex: 1, backgroundColor: theme.bg() }}>
+        <PendingList/>
       </View>
     );
   }

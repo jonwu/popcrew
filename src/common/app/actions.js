@@ -13,11 +13,22 @@ export function initUsers() {
     })
   }
 }
-export function initEvents() {
+export function initActiveEvents() {
   return (dispatch, getState) => {
-    return dispatch(load('init_events', BackendAPI.getEvents().then((response) => {
+    return dispatch(load('init_active_events', BackendAPI.getEvents({ status: 'active' }).then((response) => {
       dispatch({
-        type: ActionTypes.UPDATE_EVENTS,
+        type: ActionTypes.UPDATE_ACTIVE_EVENTS,
+        events: response.data,
+      })
+      return response.data;
+    })));
+  }
+}
+export function initIdleEvents() {
+  return (dispatch, getState) => {
+    return dispatch(load('init_idle_events', BackendAPI.getEvents({ status: 'idle' }).then((response) => {
+      dispatch({
+        type: ActionTypes.UPDATE_IDLE_EVENTS,
         events: response.data,
       })
       return response.data;
