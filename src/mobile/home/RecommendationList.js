@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import { connect, } from 'react-redux';
+import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import RecommendationList from './RecommendationList';
+import CreateEventEntry from './CreateEventEntry';
+import FeedList from '../feed/FeedList'
 
 function generateStyles(theme) {
   return {}
 }
-class Home extends Component {
+class RecommendationList extends Component {
   constructor(props) {
     super(props);
   }
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <View style={{ flex: 1, backgroundColor: theme.bg() }}>
-        <RecommendationList/>
-      </View>
+      <FlatList
+        data={[]}
+        ListHeaderComponent={() => (
+          <View>
+            <CreateEventEntry />
+            <FeedList />
+          </View>
+        )}
+      />
     );
   }
 }
@@ -33,4 +40,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-)(Home);
+)(RecommendationList);

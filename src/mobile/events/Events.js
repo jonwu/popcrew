@@ -20,7 +20,6 @@ class Events extends Component {
   }
   render() {
     const { gstyles, theme, styles, loaderInitActiveEvents } = this.props;
-    console.log(loaderInitActiveEvents);
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
         <Loader loader={loaderInitActiveEvents} >

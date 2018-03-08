@@ -25,6 +25,14 @@ function idleEvents(state = [], action) {
       return state;
   }
 }
+function pendingEvents(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_PENDING_EVENTS:
+      return action.events;
+    default:
+      return state;
+  }
+}
 function invitations(state = [], action) {
   switch (action.type) {
     case ActionTypes.UPDATE_INVITATIONS:
@@ -37,5 +45,6 @@ export default combineReducers({
   users,
   activeEvents,
   idleEvents,
+  pendingEvents,
   invitations,
 })

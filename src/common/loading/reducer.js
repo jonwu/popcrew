@@ -2,7 +2,8 @@ import * as ActionTypes from './actionTypes';
 
 const FEATURES = [
   'init_active_events',
-  'init_idles_events',
+  'init_idle_events',
+  'init_pending_events',
   'init_invitations',
 ];
 const defaultState = FEATURES.reduce((previous, current) => Object.assign({}, previous, {

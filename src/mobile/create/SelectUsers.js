@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackendAPI from '../../common/api/BackendApi';
+import { Actions } from 'react-native-router-flux';
 
 function generateStyles(theme) {
   return {};
@@ -26,7 +27,7 @@ class SelectedUsers extends Component {
     BackendAPI.postEvents({name, valid_days, users}).then(event => {
       console.log(event);
     })
-
+    Actions.home();
   }
   render() {
     const { gstyles, theme, styles, users } = this.props;

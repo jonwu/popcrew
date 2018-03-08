@@ -39,9 +39,9 @@ class Root extends Component {
             <Stack key="eventsTab" title="events" icon={TabIcon}>
               <Scene key="events" component={Events} hideNavBar/>
             </Stack>
-            <Stack key="invitationsTab" title="invitations" icon={TabIcon}>
+            {/* <Stack key="invitationsTab" title="invitations" icon={TabIcon}>
               <Scene key="invitations" component={Invitations} hideNavBar/>
-            </Stack>
+            </Stack> */}
           </Tabs>
           <Scene key="createEvent" component={CreateEvent} hideNavBar/>
           <Scene key="selectUsers" component={SelectUsers} hideNavBar/>

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import PendingList from '../pending/PendingList';
+import { CheckBox } from '../app/components';
 
 function generateStyles(theme) {
   return {};
@@ -23,22 +24,43 @@ class CreateEvent extends Component {
     this.state = {
       text: '',
       selectedOptions: [],
+      options: [
+        { value: 'Monday', key: 'monday' },
+        { value: 'Tuesday', key: 'tuesday' },
+        { value: 'Wednesday', key: 'wednesday' },
+        { value: 'Thursday', key: 'thursday' },
+        { value: 'Friday', key: 'friday' },
+        { value: 'Saturday', key: 'saturday' },
+        { value: 'Sunday', key: 'sunday' },
+        { value: 'Any day', key: 'all' },
+      ],
     };
+    this.onOptionPress = this.onOptionPress.bind(this);
   }
 
+  onOptionPress(option) {
+    const { selectedOptions, options } = this.state;
+    const hasOption = selectedOptions.find(selectedOption => selectedOption.key === option.key);
+    const isAll = selectedOptions.length === options.length - 1;
+    let updatedSelectedOptions;
+    switch (option.key) {
+      case 'all': {
+        updatedSelectedOptions = isAll ? [] : options.filter(option => option.key !== 'all');
+        break;
+      }
+      default: {
+        updatedSelectedOptions = hasOption
+          ? selectedOptions.filter(selectedOption => selectedOption.key !== option.key)
+          : [...selectedOptions, option];
+        break;
+      }
+    }
+    this.setState({ selectedOptions: updatedSelectedOptions });
+  }
   render() {
     const { gstyles, theme, styles } = this.props;
-    const { selectedOptions, text } = this.state;
-    const options = [
-      { value: 'Monday', key: 'monday' },
-      { value: 'Tuesday', key: 'tuesday' },
-      { value: 'Wednesday', key: 'wednesday' },
-      { value: 'Thursday', key: 'thursday' },
-      { value: 'Friday', key: 'friday' },
-      { value: 'Saturday', key: 'saturday' },
-      { value: 'Sunday', key: 'sunday' },
-      { value: 'Any day', key: 'all' },
-    ];
+    const { selectedOptions, text, options } = this.state;
+
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg() }}>
         <View style={{ height: 50 }} />
@@ -70,82 +92,39 @@ class CreateEvent extends Component {
               );
               const isAll = selectedOptions.length === options.length - 1;
               return (
-                <TouchableWithoutFeedback
+                <CheckBox
                   key={i}
-                  onPress={() => {
-                    let updatedSelectedOptions;
-                    switch (option.key) {
-                      case 'all': {
-                        updatedSelectedOptions = isAll
-                          ? []
-                          : options.filter(option => option.key !== 'all');
-                        break;
-                      }
-                      default: {
-                        if (hasOption) {
-                          updatedSelectedOptions = selectedOptions.filter(
-                            selectedOption => selectedOption.key !== option.key,
-                          );
-                        } else {
-                          updatedSelectedOptions = [...selectedOptions, option];
-                        }
-                        break;
-                      }
-                    }
-                    this.setState({ selectedOptions: updatedSelectedOptions });
-                  }}
-                >
-                  <View
-                    style={[
-                      {
-                        flexDirection: 'row',
-                        height: 32,
-                        alignItems: 'center',
-                        borderRadius: theme.borderRadius,
-                        overflow: 'hidden',
-                        backgroundColor: theme.text(0.1),
-                      },
-                      gstyles.right_4,
-                      gstyles.bottom_4,
-                    ]}
-                  >
-                    <View
-                      style={{
-                        width: 32,
-                        backgroundColor: hasOption || isAll ? theme.yellow() : theme.text(0.1),
-                        alignSelf: 'stretch',
-                      }}
-                    />
-                    <Text
-                      style={[
-                        gstyles.caption_bold,
-                        { paddingHorizontal: theme.spacing_3, color: hasOption || isAll ? theme.text(0.8) : theme.text(0.5) },
-                      ]}
-                    >
-                      {option.value}
-                    </Text>
-                  </View>
-                </TouchableWithoutFeedback>
+                  onPress={() => this.onOptionPress(option)}
+                  active={hasOption || isAll}
+                  text={option.value}
+                />
               );
             })}
           </View>
         </View>
-        <View style={{ flex: 1 }}/>
+        <View style={{ flex: 1 }} />
         {/* <PendingList /> */}
-        {this.state.text.trim() !== '' && this.state.selectedOptions.length > 0 && (
-          <TouchableOpacity
-            onPress={() => {
-              Actions.selectUsers({text, selectedOptions})
-            }}
+        {this.state.text.trim() !== '' &&
+          this.state.selectedOptions.length > 0 && (
+            <TouchableOpacity
+              onPress={() => {
+                Actions.selectUsers({ text, selectedOptions });
+              }}
             >
-            <View style={{ flexDirection: 'row', backgroundColor: theme.blue(), alignItems: 'center'}}>
-              <View style={{flex: 1}} />
-              <View style={{padding: theme.spacing_2, backgroundColor: theme.blue()}}>
-                <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  backgroundColor: theme.blue(),
+                  alignItems: 'center',
+                }}
+              >
+                <View style={{ flex: 1 }} />
+                <View style={{ padding: theme.spacing_2, backgroundColor: theme.blue() }}>
+                  <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        )}
+            </TouchableOpacity>
+          )}
       </View>
     );
   }

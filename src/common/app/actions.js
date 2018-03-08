@@ -35,6 +35,19 @@ export function initIdleEvents() {
     })));
   }
 }
+export function initPendingEvents(params) {
+  return (dispatch, getState) => {
+    const userId = getState().settings.user._id;
+    return BackendAPI.getEvents({ status: 'pending', user: userId }).then((response) => {
+      console.log(response.data);
+      dispatch({
+        type: ActionTypes.UPDATE_PENDING_EVENTS,
+        events: response.data,
+      })
+      return response.data;
+    });
+  }
+}
 
 export function initInvitations(params) {
   return (dispatch, getState) => {

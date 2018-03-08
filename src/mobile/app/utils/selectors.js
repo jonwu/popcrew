@@ -15,3 +15,10 @@ export const stylesSelector = generateStyles => {
     return generateStyles(theme);
   });
 };
+
+export const pendingEventItems = createSelector(
+  state => state.app.pendingEvents,
+  events => events.map(event => {
+    return { type: 'pending_event', data: event }
+  })
+);
