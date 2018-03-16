@@ -13,7 +13,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import PendingList from '../pending/PendingList';
-import { CheckBox } from '../app/components';
+import { CheckBox, Counter } from '../app/components';
+import PushNotification from 'react-native-push-notification';
 
 function generateStyles(theme) {
   return {};
@@ -24,6 +25,8 @@ class CreateEvent extends Component {
     this.state = {
       text: '',
       selectedOptions: [],
+      notifiedDaysBefore: 7,
+      duration: 1,
       options: [
         { value: 'Monday', key: 'monday' },
         { value: 'Tuesday', key: 'tuesday' },
@@ -36,6 +39,7 @@ class CreateEvent extends Component {
       ],
     };
     this.onOptionPress = this.onOptionPress.bind(this);
+    PushNotification.requestPermissions();
   }
 
   onOptionPress(option) {
@@ -84,7 +88,20 @@ class CreateEvent extends Component {
           value={text}
         />
         <View style={{ paddingHorizontal: theme.spacing_2 }}>
-          <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_3]}>What days?</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+            <View style={{width: 200}}>
+              <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_5]}>How many days needed for preparation?</Text>
+              <Text style={[gstyles.footnote, { color: theme.text(0.5) }, gstyles.bottom_1]}>For example, out-of-state trips may want at least 45 days of prepartion to book airplane tickets ahead of time.</Text>
+            </View>
+            <Counter defaultValue={this.state.notifiedDaysBefore} onValueChange={(value) => this.setState({notifiedDaysBefore: value})}/>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+            <View style={{width: 200}}>
+              <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>How many days is your event?</Text>
+            </View>
+            <Counter defaultValue={this.state.duration} onValueChange={(value) => this.setState({duration: value})}/>
+          </View>
+          <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>What days does your event start on?</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {options.map((option, i) => {
               const hasOption = selectedOptions.find(

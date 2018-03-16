@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import { signIn } from '../../common/app/actions';
+import { Actions } from 'react-native-router-flux';
 
 
 function generateStyles(theme) {
@@ -20,7 +21,7 @@ class SignIn extends Component {
   onSignIn() {
     const { signIn } = this.props;
     const { username } = this.state;
-    signIn({ username });
+    signIn({ username }).then(Actions.app);
   }
   render() {
     const { gstyles, theme, styles } = this.props;

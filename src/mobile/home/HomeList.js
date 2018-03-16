@@ -3,13 +3,13 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import CreateEventEntry from './CreateEventEntry';
+import HomeHeader from './HomeHeader';
 import FeedList from '../feed/FeedList'
 
 function generateStyles(theme) {
   return {}
 }
-class RecommendationList extends Component {
+class HomeList extends Component {
   constructor(props) {
     super(props);
   }
@@ -20,7 +20,7 @@ class RecommendationList extends Component {
         data={[]}
         ListHeaderComponent={() => (
           <View>
-            <CreateEventEntry />
+            <HomeHeader />
             <FeedList />
           </View>
         )}
@@ -40,4 +40,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-)(RecommendationList);
+)(HomeList);

@@ -12,7 +12,7 @@ class Loader extends Component {
     super(props);
   }
   render() {
-    const { loader } = this.props;
+    const { loader, onError } = this.props;
     if (loader.isRequesting) return <Text>Loading</Text>
     if (loader.isReceived) return this.props.children;
     if (loader.error && onError) return onError(loader.error);

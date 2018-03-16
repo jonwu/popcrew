@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import PendingItem from './PendingItem';
 import { initIdleEvents } from '../../common/app/actions';
-import CreateEntry from '../create/CreateEntry'
 
 function generateStyles(theme) {
   return {};
@@ -29,7 +28,6 @@ class EventList extends Component {
         keyExtractor={(item) => item._id}
         renderItem={({ item, index }) => <PendingItem item={item} index={index}/>}
         ItemSeparatorComponent={() => <View style={{height: theme.spacing_2}}/>}
-        ListHeaderComponent={() => <CreateEntry/> }
       />
     );
   }

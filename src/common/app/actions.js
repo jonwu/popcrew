@@ -39,9 +39,22 @@ export function initPendingEvents(params) {
   return (dispatch, getState) => {
     const userId = getState().settings.user._id;
     return BackendAPI.getEvents({ status: 'pending', user: userId }).then((response) => {
-      console.log(response.data);
       dispatch({
         type: ActionTypes.UPDATE_PENDING_EVENTS,
+        events: response.data,
+      })
+      return response.data;
+    });
+  }
+}
+
+export function initFeedEvents(params) {
+  return (dispatch, getState) => {
+    const userId = getState().settings.user._id;
+    return BackendAPI.getEvents({ status: 'pending,processing', user: userId, expiration: 1 }).then((response) => {
+      console.log("events", response.data)
+      dispatch({
+        type: ActionTypes.UPDATE_FEED_EVENTS,
         events: response.data,
       })
       return response.data;
@@ -64,7 +77,6 @@ export function initInvitations(params) {
 export function signUp(params) {
   return (dispatch, getState) => {
     return BackendAPI.postUser(params).then((response) => {
-      console.log(response);
       dispatch({
         type: ActionTypes.SAVE_USER,
         user: response.data,

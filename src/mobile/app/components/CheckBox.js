@@ -12,9 +12,10 @@ class CheckBox extends Component {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles, onPress, active, text } = this.props;
+    const { gstyles, theme, styles, onPress, active, activeColor, text, disabled } = this.props;
     return (
       <TouchableWithoutFeedback
+        disabled={disabled}
         onPress={onPress}
       >
         <View
@@ -26,6 +27,7 @@ class CheckBox extends Component {
               borderRadius: theme.borderRadius,
               overflow: 'hidden',
               backgroundColor: theme.text(0.1),
+              opacity: disabled ? 0.1 : null,
             },
             gstyles.right_4,
             gstyles.bottom_4,
@@ -34,7 +36,7 @@ class CheckBox extends Component {
           <View
             style={{
               width: 32,
-              backgroundColor: active ? theme.yellow() : theme.text(0.1),
+              backgroundColor: active ? activeColor || theme.yellow() : theme.text(0.1),
               alignSelf: 'stretch',
             }}
           />

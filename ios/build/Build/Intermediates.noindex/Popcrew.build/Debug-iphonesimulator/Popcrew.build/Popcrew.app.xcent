@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>Z2MXLM39UM.org.reactjs.native.example.Popcrew</string>
+	<string>Z2MXLM39UM.org.reactjs.native.jonwu.Popcrew</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>Z2MXLM39UM.org.reactjs.native.example.Popcrew</string>
+		<string>Z2MXLM39UM.org.reactjs.native.jonwu.Popcrew</string>
 	</array>
 </dict>
 </plist>

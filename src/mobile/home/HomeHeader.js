@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function generateStyles(theme) {
   return {};
 }
-class CreateEntry extends Component {
+class HomeHeader extends Component {
   constructor(props) {
     super(props);
 
@@ -19,21 +19,16 @@ class CreateEntry extends Component {
     return (
       <TouchableOpacity
         onPress={Actions.createEvent}
-        style={{ paddingVertical: theme.spacing_1 }}
       >
-        <Text style={[gstyles.h1_bold, { color: theme.text(0.5) }]}>
-          Got something{'\n'}you wanna do?{'\n'}
-          {'\n'}
-        </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 * 2}}>
           <View>
-            <Text style={[gstyles.h1_bold, { color: theme.text() }]}>Toss it...</Text>
+            <Text style={[gstyles.h2_bold, { color: theme.yellow() }]}>Toss an event</Text>
             <Text style={[gstyles.p1_bold, { color: theme.text(0.5) }]}>
               and we'll make it happen
             </Text>
           </View>
           <View style={{ flex: 1 }} />
-          <Icon name="chevron-circle-right" size={48} color={theme.yellow()} />
+          <Icon name="chevron-circle-right" size={40} color={theme.yellow()} />
         </View>
       </TouchableOpacity>
     );
@@ -47,4 +42,4 @@ function mapStateToProps(state, ownProps) {
     styles: stylesSelector(state.settings.theme),
   };
 }
-export default connect(mapStateToProps)(CreateEntry);
+export default connect(mapStateToProps)(HomeHeader);

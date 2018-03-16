@@ -19,10 +19,10 @@ class SelectedUsers extends Component {
     this.onShare = this.onShare.bind(this);
   }
   onShare() {
-    const { selectedOptions, text } = this.props;
+    const { selectedOptions, text, user } = this.props;
     const { selectedUsers } = this.state;
     const valid_days = selectedOptions.map(options => options.key).join(',');
-    const users = selectedUsers.map(user => user._id).join(',');
+    const users = [...selectedUsers, user].map(user => user._id).join(',');
     const name = text;
     BackendAPI.postEvents({name, valid_days, users}).then(event => {
       console.log(event);
@@ -30,12 +30,12 @@ class SelectedUsers extends Component {
     Actions.home();
   }
   render() {
-    const { gstyles, theme, styles, users } = this.props;
+    const { gstyles, theme, styles, users, user } = this.props;
     const { selectedUsers } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-          data={users}
+          data={users.filter(u => u._id !== user._id)}
           keyExtractor={(item, i) => item._id}
           renderItem={({ item }) => {
             const hasUserKey = selectedUsers.find(user => user._id === item._id);
@@ -60,7 +60,7 @@ class SelectedUsers extends Component {
                   }}
                 >
                   <Text style={[gstyles.h4, { color: hasUserKey ? theme.red() : theme.text() }]}>
-                    {item.username}
+                    {item.firstname} {item.lastname}
                   </Text>
                   <View style={{ flex: 1 }} />
                   {hasUserKey && <Icon name="check-circle" size={24} color={theme.red()} />}
@@ -111,6 +111,7 @@ function mapStateToProps(state, ownProps) {
     gstyles: state.settings.light_gstyles,
     styles: stylesSelector(state.settings.theme),
     users: state.app.users,
+    user: state.settings.user,
   };
 }
 

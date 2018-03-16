@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect, } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import RecommendationList from './RecommendationList';
+import HomeList from './HomeList';
 
 function generateStyles(theme) {
   return {}
@@ -16,7 +16,7 @@ class Home extends Component {
     const { gstyles, theme, styles } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg() }}>
-        <RecommendationList/>
+        <HomeList/>
       </View>
     );
   }

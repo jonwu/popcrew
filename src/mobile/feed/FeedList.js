@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { generateStylesSelector, pendingEventItems } from '../app/utils/selectors';
+import { generateStylesSelector, feedEventItems } from '../app/utils/selectors';
 import PendingEventItem from './PendingEventItem';
+import ProcessEventItem from './ProcessEventItem';
+import Dimensions from 'Dimensions';
+import Carousel from 'react-native-snap-carousel';
 
 function generateStyles(theme) {
   return {};
@@ -12,28 +15,48 @@ function generateStyles(theme) {
 class FeedList extends Component {
   constructor(props) {
     super(props);
+    this.renderItem = this.renderItem.bind(this);
   }
 
+  renderItem({ item, index }) {
+    const { gstyles, theme, styles} = this.props;
+    let content = null;
+    console.log(item.type)
+    switch(item.type) {
+      case 'pending_event':
+        content = <PendingEventItem item={item} index={index}/>
+        break;
+      case 'processing_event':
+        content = <ProcessEventItem item={item} index={index} />
+        break;
+      default:
+        content = null;
+        break;
+    }
+    return (<View style={{
+      borderRadius: theme.borderRadius * 2,
+      overflow: 'hidden',
+      height: 360,
+      width: Dimensions.get('window').width * .75,
+    }}>
+      { content }
+    </View>)
+  }
   render() {
-    const { gstyles, theme, styles, events, loaderInitFeedItems, pendingEventItems} = this.props;
-    const feedItems = [...pendingEventItems];
-
+    const { gstyles, theme, styles, events, light_theme, loaderInitFeedItems, feedEventItems} = this.props;
+    const feedItems = [...feedEventItems];
+    console.log(feedEventItems)
     return (
-      <FlatList
-        horizontal
-        style={{ paddingHorizontal: theme.spacing_2, paddingVertical: theme.spacing_2}}
-        data={feedItems}
-        keyExtractor={(item, index) => index}
-        renderItem={({ item, index }) => {
-          switch(item.type) {
-            case 'pending_event':
-              return <PendingEventItem item={item} index={index}/>
-            default:
-              return null;
-          }
-        }}
-        ItemSeparatorComponent={() => <View style={{width: theme.spacing_2}}/>}
-      />
+      <View style={[{ paddingVertical: theme.spacing_2, backgroundColor: theme.bg2()}, gstyles.top_2]}>
+        <Carousel
+          style={{paddingTop: theme.spacing_2}}
+          data={feedItems}
+          renderItem={this.renderItem}
+          sliderWidth={Dimensions.get('window').width}
+          itemWidth={Dimensions.get('window').width * .75}
+          itemHeight={360}
+        />
+      </View>
     );
   }
 }
@@ -42,11 +65,11 @@ const stylesSelector = generateStylesSelector(generateStyles);
 function mapStateToProps(state, ownProps) {
   return {
     theme: state.settings.theme,
+    light_theme: state.settings.light_theme,
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
-    pendingEvents: state.app.pendingEvents,
     loaderInitFeedItems: state.loading.init_feed_items,
-    pendingEventItems: pendingEventItems(state),
+    feedEventItems: feedEventItems(state),
   };
 }
 

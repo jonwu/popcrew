@@ -16,9 +16,17 @@ export const stylesSelector = generateStyles => {
   });
 };
 
-export const pendingEventItems = createSelector(
-  state => state.app.pendingEvents,
+export const feedEventItems = createSelector(
+  state => state.app.feedEvents,
   events => events.map(event => {
-    return { type: 'pending_event', data: event }
+    console.log(event)
+    switch(event.status) {
+      case 'pending':
+        return { type: 'pending_event', data: event }
+      case 'processing':
+        return { type: 'processing_event', data: event }
+      default:
+       return null;
+    }
   })
 );

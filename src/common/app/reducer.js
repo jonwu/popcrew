@@ -9,6 +9,14 @@ function users(state = [], action) {
       return state;
   }
 }
+function feedEvents(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.UPDATE_FEED_EVENTS:
+      return action.events;
+    default:
+      return state;
+  }
+}
 function activeEvents(state = [], action) {
   switch (action.type) {
     case ActionTypes.UPDATE_ACTIVE_EVENTS:
@@ -47,4 +55,5 @@ export default combineReducers({
   idleEvents,
   pendingEvents,
   invitations,
+  feedEvents,
 })

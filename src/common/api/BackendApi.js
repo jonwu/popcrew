@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3000';
+const URL = 'http://192.168.86.83:3000';
 const instance = axios.create({ timeout: 10000, baseURL: URL });
 
 
@@ -21,6 +21,9 @@ class API {
   postEvents(params) {
     return instance.post(`/events`, params);
   }
+  patchEvent(eventId, params) {
+    return instance.patch(`/events/${eventId}`,params);
+  }
   postUser(params) {
     return instance.post(`/users`, params);
   }
@@ -31,11 +34,14 @@ class API {
     return instance.get(`/users/${userId}`, { params });
   }
   signIn(params) {
-    return instance.get(`/signIn`, { params });
+    return instance.get(`/signin`, { params });
   }
 
   getInvitations(params) {
     return instance.get(`/invitations`, { params });
+  }
+  patchInvitation(invitationId, params) {
+    return instance.patch(`/invitations/${invitationId}`,params);
   }
 
 }
