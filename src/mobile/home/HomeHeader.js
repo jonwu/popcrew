@@ -17,20 +17,17 @@ class HomeHeader extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <TouchableOpacity
-        onPress={Actions.createEvent}
-      >
-        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 * 2}}>
-          <View>
-            <Text style={[gstyles.h2_bold, { color: theme.yellow() }]}>Toss an event</Text>
-            <Text style={[gstyles.p1_bold, { color: theme.text(0.5) }]}>
-              and we'll make it happen
-            </Text>
+
+      <View style={[{alignItems: 'center', justifyContent: 'center', marginTop: theme.spacing_1}]}>
+        <TouchableOpacity
+          onPress={Actions.createEventStep1}
+        >
+          <View style={{ borderRadius: 40, height: 48, width: 200, backgroundColor: theme.green(), alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={[gstyles.p1_bold]}>Toss an idea</Text>
           </View>
-          <View style={{ flex: 1 }} />
-          <Icon name="chevron-circle-right" size={40} color={theme.yellow()} />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <Text style={[gstyles.caption_bold, {color: theme.text(0.5)}, gstyles.top_4]}>and we'll make it happen...</Text>
+      </View>
     );
   }
 }

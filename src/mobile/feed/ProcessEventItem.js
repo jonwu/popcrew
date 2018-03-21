@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import UserList from '../users/UserList';
+import EventUserList from '../users/EventUserList';
 import { CheckBox } from '../app/components';
 import moment from 'moment';
 import BackendAPI from '../../common/api/BackendApi';
@@ -43,7 +43,7 @@ class ProcessEventItem extends Component {
         <Text style={[gstyles.h4_bold, gstyles.bottom_5, { color: theme.text() }]}>
           {processingEvent.name}
         </Text>
-        <UserList users={processingEvent.users} />
+        <EventUserList users={processingEvent.users} />
         <View style={{flex: 1}}/>
         <View style={{alignItems: 'flex-start'}}>
           {processingEvent.dates_options.map((date, i) => {

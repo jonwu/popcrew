@@ -13,6 +13,24 @@ export function initUsers() {
     })
   }
 }
+export function initGroups() {
+  return (dispatch, getState) => {
+    return BackendAPI.getGroups().then((response) => {
+      dispatch({
+        type: ActionTypes.UPDATE_GROUPS,
+        groups: response.data,
+      })
+      return response.data;
+    })
+  }
+}
+export function addGroup(group) {
+  
+  return {
+    type: ActionTypes.ADD_GROUP,
+    group,
+  }
+}
 export function initActiveEvents() {
   return (dispatch, getState) => {
     return dispatch(load('init_active_events', BackendAPI.getEvents({ status: 'active' }).then((response) => {
@@ -86,6 +104,12 @@ export function signUp(params) {
   }
 }
 
+export function savePnToken(token) {
+  return {
+    type: ActionTypes.SAVE_PN_TOKEN,
+    token,
+  }
+}
 export function signIn(params) {
   return (dispatch, getState) => {
     return BackendAPI.signIn(params).then((response) => {

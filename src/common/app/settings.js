@@ -43,7 +43,14 @@ function light_gstyles(state = generateStyles(collections[0]), action) {
       return state;
   }
 }
-
+function pnToken(state = null, action) {
+  switch (action.type) {
+    case ActionTypes.SAVE_PN_TOKEN:
+      return action.token;
+    default:
+      return state;
+  }
+}
 function user(state = null, action) {
   switch (action.type) {
     case ActionTypes.SAVE_USER:
@@ -60,4 +67,5 @@ export default combineReducers({
   dark_gstyles,
   light_gstyles,
   user,
+  pnToken,
 });

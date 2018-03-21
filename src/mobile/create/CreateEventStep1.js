@@ -15,6 +15,8 @@ import { generateStylesSelector } from '../app/utils/selectors';
 import PendingList from '../pending/PendingList';
 import { CheckBox, Counter } from '../app/components';
 import PushNotification from 'react-native-push-notification';
+import { Navigator } from '../app/components';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function generateStyles(theme) {
   return {};
@@ -67,16 +69,21 @@ class CreateEvent extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: theme.bg() }}>
-        <View style={{ height: 50 }} />
+        <Navigator renderLeft={() => <TouchableOpacity onPress={Actions.pop}>
+          <View style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}>
+            <Icon name="ios-arrow-back" size={30} color={theme.text()} />
+          </View>
+        </TouchableOpacity>}/>
         <TextInput
           style={[
             gstyles.p1,
             gstyles.bottom_2,
             {
+              paddingTop: theme.spacing_1,
               paddingHorizontal: theme.spacing_2,
               borderBottomWidth: theme.borderWidth,
               borderColor: theme.borderColor,
-              height: 50,
+              height: 80,
             },
           ]}
           multiline
@@ -88,19 +95,19 @@ class CreateEvent extends Component {
           value={text}
         />
         <View style={{ paddingHorizontal: theme.spacing_2 }}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
             <View style={{width: 200}}>
               <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_5]}>How many days needed for preparation?</Text>
               <Text style={[gstyles.footnote, { color: theme.text(0.5) }, gstyles.bottom_1]}>For example, out-of-state trips may want at least 45 days of prepartion to book airplane tickets ahead of time.</Text>
             </View>
             <Counter defaultValue={this.state.notifiedDaysBefore} onValueChange={(value) => this.setState({notifiedDaysBefore: value})}/>
-          </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+          </View> */}
+          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
             <View style={{width: 200}}>
               <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>How many days is your event?</Text>
             </View>
             <Counter defaultValue={this.state.duration} onValueChange={(value) => this.setState({duration: value})}/>
-          </View>
+          </View> */}
           <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>What days does your event start on?</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {options.map((option, i) => {
@@ -125,7 +132,7 @@ class CreateEvent extends Component {
           this.state.selectedOptions.length > 0 && (
             <TouchableOpacity
               onPress={() => {
-                Actions.selectUsers({ text, selectedOptions });
+                Actions.createEventStep2({ text, selectedOptions });
               }}
             >
               <View

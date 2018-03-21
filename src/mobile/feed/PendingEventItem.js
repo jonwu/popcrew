@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import BackendAPI from '../../common/api/BackendApi';
 import { CheckBox } from '../app/components';
-import UserList from '../users/UserList';
+import EventUserList from '../users/EventUserList';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -105,7 +105,7 @@ class PendingEventItem extends Component {
           Let us know when you're free.
         </Text>
 
-        <UserList users={pendingEvent.users} />
+        <EventUserList users={pendingEvent.users} />
         <View style={{ flex: 1 }} />
 
         {invitation && (

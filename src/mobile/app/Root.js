@@ -6,8 +6,10 @@ import { generateStylesSelector } from './utils/selectors';
 import { Scene, Router, Actions, Stack, Tabs } from 'react-native-router-flux';
 import { TabIcon } from './components';
 import Home from '../home/Home';
-import CreateEvent from '../create/CreateEvent';
-import SelectUsers from '../create/SelectUsers';
+import Users from '../users/Users';
+import CreateEventStep1 from '../create/CreateEventStep1';
+import CreateEventStep2 from '../create/CreateEventStep2';
+import CreateGroup from '../create/CreateGroup';
 import Registration from '../registration/Registration';
 import Events from '../events/Events';
 import Invitations from '../invitations/Invitations';
@@ -43,8 +45,10 @@ class Root extends Component {
               <Scene key="invitations" component={Invitations} hideNavBar/>
             </Stack> */}
           </Tabs>
-          <Scene key="createEvent" component={CreateEvent} hideNavBar/>
-          <Scene key="selectUsers" component={SelectUsers} hideNavBar/>
+          <Scene key="createEventStep1" component={CreateEventStep1} hideNavBar/>
+          <Scene key="createEventStep2" component={CreateEventStep2} hideNavBar/>
+          <Scene key="createGroup" component={CreateGroup} hideNavBar/>
+          <Scene key="users" component={Users} hideNavBar/>
         </Stack>
       </Router>
     );

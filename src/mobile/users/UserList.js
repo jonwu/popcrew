@@ -1,47 +1,43 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, SectionList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import Dimensions from 'Dimensions';
-
-const ITEM_WIDTH = 40;
-const OFFSET = 12;
-const N_ITEMS = Dimensions.get('window').width % (ITEM_WIDTH + OFFSET)
+import FriendItem from './FriendItem';
+import GroupItem from './GroupItem';
+import UserSectionHeaders from './UserSectionHeaders';
 
 function generateStyles(theme) {
   return {}
 }
-function UserItem(props) {
-  const { gstyles, theme, user } = props;
-  return (
-    <View
-      style={{
-        height: ITEM_WIDTH,
-        width: ITEM_WIDTH,
-        borderRadius: ITEM_WIDTH/2,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: theme.bg2(),
-        marginRight: theme.spacing_5,
-      }}
-    >
-      <Text style={[gstyles.caption_bold, { color: theme.text() }]}>{`${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`}</Text>
-    </View>
-  )
-}
 class UserList extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-    const { gstyles, theme, users } = this.props;
-    const userItems = []
-    const userLength = users.length < N_ITEMS ? users.length : N_ITEMS;
-    for(let i = 0; i < userLength; i++ ) {
-      userItems.push(<UserItem key={i} user={users[i]} {...this.props}/>)
-    }
+    const { gstyles, theme, styles, users, groups } = this.props;
     return (
-      <View style={{ flexDirection: 'row' }}>
-        {userItems}
-      </View>
+      <SectionList
+        renderItem={({item, section}) => {
+          switch(section.title) {
+            case 'friends':
+              return <FriendItem user={item}/>
+            case 'groups':
+              return <GroupItem group={item}/>
+            default:
+              return null;
+          }
+        }}
+        renderSectionHeader={({section}) => {
+          return <UserSectionHeaders section={section}/>
+        }}
+        sections={[
+          { data: users, title: 'friends'},
+          { data: groups, title: 'groups'}
+        ]}
+        keyExtractor={(item) => item._id}
+        stickySectionHeadersEnabled={false}
+      />
     );
   }
 }
@@ -52,6 +48,8 @@ function mapStateToProps(state, ownProps) {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
+    users: state.app.users,
+    groups: state.app.groups,
   };
 }
 

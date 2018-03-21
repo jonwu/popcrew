@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const URL = 'http://192.168.86.83:3000';
+const URL = 'http://192.168.86.90:3000';
+// const URL = 'http://localhost:3000';
 const instance = axios.create({ timeout: 10000, baseURL: URL });
 
 
@@ -27,11 +28,23 @@ class API {
   postUser(params) {
     return instance.post(`/users`, params);
   }
+  patchUser(userId, params) {
+    return instance.patch(`/users/${userId}`, params);
+  }
   getUsers(params) {
     return instance.get(`/users`, { params });
   }
   getUser(params, userId) {
     return instance.get(`/users/${userId}`, { params });
+  }
+  postGroup(params) {
+    return instance.post(`/groups`, params);
+  }
+  patchGroups(userId, params) {
+    return instance.patch(`/groups/${groupId}`, params);
+  }
+  getGroups(params) {
+    return instance.get(`/groups`, { params });
   }
   signIn(params) {
     return instance.get(`/signin`, { params });

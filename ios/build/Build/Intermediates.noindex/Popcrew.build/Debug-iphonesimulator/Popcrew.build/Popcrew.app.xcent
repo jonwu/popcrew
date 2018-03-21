@@ -4,9 +4,7 @@
 <dict>
 	<key>application-identifier</key>
 	<string>Z2MXLM39UM.org.reactjs.native.jonwu.Popcrew</string>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>Z2MXLM39UM.org.reactjs.native.jonwu.Popcrew</string>
-	</array>
+	<key>aps-environment</key>
+	<string>development</string>
 </dict>
 </plist>

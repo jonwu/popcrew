@@ -6,32 +6,33 @@ import { generateStylesSelector } from '../app/utils/selectors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackendAPI from '../../common/api/BackendApi';
 import { Actions } from 'react-native-router-flux';
+import { addGroup } from '../../common/app/actions';
 
 function generateStyles(theme) {
   return {};
 }
-class SelectedUsers extends Component {
+class CreateGroup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedUsers: [],
     };
-    this.onShare = this.onShare.bind(this);
+    this.onCreate = this.onCreate.bind(this);
   }
-  onShare() {
-    const { selectedOptions, text, user } = this.props;
+  onCreate() {
+    const { selectedOptions, text, user, addGroup } = this.props;
     const { selectedUsers } = this.state;
-    const valid_days = selectedOptions.map(options => options.key).join(',');
     const users = [...selectedUsers, user].map(user => user._id).join(',');
-    const name = text;
-    BackendAPI.postEvents({name, valid_days, users}).then(event => {
-      console.log(event);
+    BackendAPI.postGroup({users}).then(response => {
+      addGroup(response.data);
+      Actions.pop();
     })
-    Actions.home();
+
   }
   render() {
     const { gstyles, theme, styles, users, user } = this.props;
     const { selectedUsers } = this.state;
+    
     return (
       <View style={{ flex: 1 }}>
         <FlatList
@@ -74,7 +75,7 @@ class SelectedUsers extends Component {
         />
         <View style={{ flex: 1 }} />
         {selectedUsers.length > 0 && (
-          <TouchableOpacity onPress={this.onShare}>
+          <TouchableOpacity onPress={this.onCreate}>
             <View
               style={{
                 flexDirection: 'row',
@@ -95,7 +96,7 @@ class SelectedUsers extends Component {
                 )}
               />
               <View style={{ flex: 1 }} />
-              <Text style={[gstyles.h4_bold, { color: theme.light() }, gstyles.left_2]}>SHARE</Text>
+              <Text style={[gstyles.h4_bold, { color: theme.light() }, gstyles.left_2]}>CREATE</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -115,4 +116,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(SelectedUsers);
+export default connect(mapStateToProps, { addGroup })(CreateGroup);

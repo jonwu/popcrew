@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		cJ3AKLWFzRdgkWZ3W13VXeKf4y8=
+		POGkQprBeM3sYzJBc7F3ra6Fk6o=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -99,7 +99,7 @@
 		</data>
 		<key>PlugIns/PopcrewTests.xctest.dSYM/Contents/Resources/DWARF/PopcrewTests</key>
 		<data>
-		9N7ykbHN38Z33NJW1FHxY5jae4s=
+		YuIzSUbIRGjDKEClW9b4EhxaiUE=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/Info.plist</key>
 		<data>
@@ -107,7 +107,7 @@
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/PopcrewTests</key>
 		<data>
-		ltsFEimKQf7ClOT5YgJcO+nxQdo=
+		8OeMvCNNRE3OWywLqQZWpGlbya4=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -128,11 +128,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cJ3AKLWFzRdgkWZ3W13VXeKf4y8=
+			POGkQprBeM3sYzJBc7F3ra6Fk6o=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ygtqi6k/QDlm3Gw+vCJefVCwDJOV4HyCbiZ6uh7JLzY=
+			cEs+s8yO+oSOvpoGjZfiW/sN3/TgkQSuF32LyIG+Dwg=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -350,11 +350,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9N7ykbHN38Z33NJW1FHxY5jae4s=
+			YuIzSUbIRGjDKEClW9b4EhxaiUE=
 			</data>
 			<key>hash2</key>
 			<data>
-			UwDFaVO9LIBRXxP8ppNsFdQGMWLlaTpGtv8Dq5yEk4c=
+			85i9Hjs3RdDIoWApIObKWeUg5J3BdsntObqazQ5C0RA=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/Info.plist</key>
@@ -372,11 +372,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ltsFEimKQf7ClOT5YgJcO+nxQdo=
+			8OeMvCNNRE3OWywLqQZWpGlbya4=
 			</data>
 			<key>hash2</key>
 			<data>
-			IyY6pW1eo0X0YPwdKfHsl2lemAOfAX41kneLyjMj3uo=
+			wtT0J5j8WlZjyA8iB+l8fj1MXshT8/luKKBr5pMFQyY=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>

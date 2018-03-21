@@ -9,6 +9,16 @@ function users(state = [], action) {
       return state;
   }
 }
+function groups(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.ADD_GROUP:
+      return [action.group, ...state];
+    case ActionTypes.UPDATE_GROUPS:
+      return action.groups;
+    default:
+      return state;
+  }
+}
 function feedEvents(state = [], action) {
   switch (action.type) {
     case ActionTypes.UPDATE_FEED_EVENTS:
@@ -51,6 +61,7 @@ function invitations(state = [], action) {
 }
 export default combineReducers({
   users,
+  groups,
   activeEvents,
   idleEvents,
   pendingEvents,
