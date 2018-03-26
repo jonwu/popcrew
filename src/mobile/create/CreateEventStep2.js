@@ -87,31 +87,31 @@ class CreateEventStep2 extends Component {
     this.onShare = this.onShare.bind(this);
   }
   onShare() {
-    const { selectedOptions, text, user, groups } = this.props;
+    const { selectedOptions, text, groups, you } = this.props;
     const { selectedUserIds, selectedGroupIds } = this.state;
     const valid_days = selectedOptions.map(options => options.key).join(',');
     const filteredGroups = [...selectedGroupIds].map(selectedGroupId => groups.find(group => selectedGroupId === group._id));
 
-    selectedUserIds.add(user._id); // add you
+    selectedUserIds.add(you._id); // add you
     filteredGroups.map(filteredGroup => filteredGroup.users.map(user => {
-      selectedUserIds.add(user._id); // add group users
+      selectedUserIds.add(you._id); // add group users
     }))
 
     const userIds = [...selectedUserIds].join(',')
     const groupIds = [...selectedGroupIds].join(',')
     const name = text;
-    console.log(userIds);
-    // BackendAPI.postEvents({name, valid_days, users}).then(event => {
-    //   console.log(event);
-    // })
+    console.log(groupIds);
+    BackendAPI.postEvents({ name, valid_days, users: userIds, groups: groupIds }).then(event => {
+      console.log(event);
+    })
     Actions.home();
   }
 
   render() {
-    const { gstyles, theme, styles, users, groups } = this.props;
-    const { selectedUserIds } = this.state;
+    const { gstyles, theme, styles, users, groups, you } = this.props;
+    const { selectedUserIds, selectedGroupIds } = this.state;
     const transformedGroups = groups.map(group => { return {type: 'group', data: group} });
-    const transformedUsers = users.map(user => { return {type: 'user', data: user }});
+    const transformedUsers = users.filter(user => user._id !== you._id).map(user => { return {type: 'user', data: user }});
     console.log(selectedUserIds);
     return (
       <View style={{ flex: 1 }}>
@@ -134,7 +134,7 @@ class CreateEventStep2 extends Component {
           )}
         />
         <View style={{ flex: 1 }} />
-        {selectedUserIds.size > 0 && (
+        {(selectedUserIds.size > 0 || selectedGroupIds.size > 0) && (
           <TouchableOpacity onPress={this.onShare}>
             <View
               style={{
@@ -173,7 +173,7 @@ function mapStateToProps(state, ownProps) {
     styles: stylesSelector(state.settings.theme),
     users: state.app.users,
     groups: state.app.groups,
-    user: state.settings.user,
+    you: state.settings.user,
   };
 }
 

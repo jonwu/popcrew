@@ -7,12 +7,12 @@ import {
   FlatList,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import PendingList from '../pending/PendingList';
 import { CheckBox, Counter } from '../app/components';
 import PushNotification from 'react-native-push-notification';
 import { Navigator } from '../app/components';
@@ -68,88 +68,97 @@ class CreateEvent extends Component {
     const { selectedOptions, text, options } = this.state;
 
     return (
-      <View style={{ flex: 1, backgroundColor: theme.bg() }}>
-        <Navigator renderLeft={() => <TouchableOpacity onPress={Actions.pop}>
-          <View style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name="ios-arrow-back" size={30} color={theme.text()} />
-          </View>
-        </TouchableOpacity>}/>
-        <TextInput
-          style={[
-            gstyles.p1,
-            gstyles.bottom_2,
-            {
-              paddingTop: theme.spacing_1,
-              paddingHorizontal: theme.spacing_2,
-              borderBottomWidth: theme.borderWidth,
-              borderColor: theme.borderColor,
-              height: 80,
-            },
-          ]}
-          multiline
-          maxLength={180}
-          onChangeText={text => this.setState({ text })}
-          returnKeyType={'done'}
-          placeholder={'Got something you wanna do?'}
-          placeholderTextColor={theme.text(0.5)}
-          value={text}
-        />
-        <View style={{ paddingHorizontal: theme.spacing_2 }}>
-          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={{ flex: 1, backgroundColor: theme.bg() }}>
+          <Navigator
+            renderLeft={() => (
+              <TouchableOpacity onPress={Actions.pop}>
+                <View
+                  style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <Icon name="ios-arrow-back" size={30} color={theme.text()} />
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+          <TextInput
+            style={[
+              gstyles.p1,
+              gstyles.bottom_2,
+              {
+                paddingTop: theme.spacing_1,
+                paddingHorizontal: theme.spacing_2,
+                borderBottomWidth: theme.borderWidth,
+                borderColor: theme.borderColor,
+                height: 80,
+              },
+            ]}
+            multiline
+            maxLength={180}
+            onChangeText={text => this.setState({ text })}
+            returnKeyType={'done'}
+            placeholder={'Got something you wanna do?'}
+            placeholderTextColor={theme.text(0.5)}
+            value={text}
+          />
+          <View style={{ paddingHorizontal: theme.spacing_2 }}>
+            {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
             <View style={{width: 200}}>
               <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_5]}>How many days needed for preparation?</Text>
               <Text style={[gstyles.footnote, { color: theme.text(0.5) }, gstyles.bottom_1]}>For example, out-of-state trips may want at least 45 days of prepartion to book airplane tickets ahead of time.</Text>
             </View>
             <Counter defaultValue={this.state.notifiedDaysBefore} onValueChange={(value) => this.setState({notifiedDaysBefore: value})}/>
           </View> */}
-          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+            {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
             <View style={{width: 200}}>
               <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>How many days is your event?</Text>
             </View>
             <Counter defaultValue={this.state.duration} onValueChange={(value) => this.setState({duration: value})}/>
           </View> */}
-          <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>What days does your event start on?</Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-            {options.map((option, i) => {
-              const hasOption = selectedOptions.find(
-                selectedOption => selectedOption.key === option.key,
-              );
-              const isAll = selectedOptions.length === options.length - 1;
-              return (
-                <CheckBox
-                  key={i}
-                  onPress={() => this.onOptionPress(option)}
-                  active={hasOption || isAll}
-                  text={option.value}
-                />
-              );
-            })}
+            <Text style={[gstyles.p1, { color: theme.text() }, gstyles.bottom_1]}>
+              What days does your event start on?
+            </Text>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+              {options.map((option, i) => {
+                const hasOption = selectedOptions.find(
+                  selectedOption => selectedOption.key === option.key,
+                );
+                const isAll = selectedOptions.length === options.length - 1;
+                return (
+                  <CheckBox
+                    key={i}
+                    onPress={() => this.onOptionPress(option)}
+                    active={hasOption || isAll}
+                    text={option.value}
+                  />
+                );
+              })}
+            </View>
           </View>
-        </View>
-        <View style={{ flex: 1 }} />
-        {/* <PendingList /> */}
-        {this.state.text.trim() !== '' &&
-          this.state.selectedOptions.length > 0 && (
-            <TouchableOpacity
-              onPress={() => {
-                Actions.createEventStep2({ text, selectedOptions });
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  backgroundColor: theme.blue(),
-                  alignItems: 'center',
+          <View style={{ flex: 1 }} />
+          {this.state.text.trim() !== '' &&
+            this.state.selectedOptions.length > 0 && (
+              <TouchableOpacity
+                onPress={() => {
+                  Actions.createEventStep2({ text, selectedOptions });
                 }}
               >
-                <View style={{ flex: 1 }} />
-                <View style={{ padding: theme.spacing_2, backgroundColor: theme.blue() }}>
-                  <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    backgroundColor: theme.blue(),
+                    alignItems: 'center',
+                  }}
+                >
+                  <View style={{ flex: 1 }} />
+                  <View style={{ padding: theme.spacing_2, backgroundColor: theme.blue() }}>
+                    <Text style={[gstyles.h4_bold, { color: theme.light() }]}>NEXT</Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          )}
-      </View>
+              </TouchableOpacity>
+            )}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

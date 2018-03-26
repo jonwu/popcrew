@@ -32,6 +32,7 @@ class ProcessEventItem extends Component {
     const { gstyles, theme, styles, item } = this.props;
     const { date_confirmed } = this.state;
     const processingEvent = item.data;
+    const expiredDays = moment.duration(moment(processingEvent.expiration).startOf('day').diff(moment().startOf('day'))).asDays();
     return (
       <View
         style={{
@@ -58,11 +59,17 @@ class ProcessEventItem extends Component {
             );
           })}
         </View>
-        <TouchableOpacity onPress={this.onCreate} disabled={!date_confirmed}>
-          <View style={{alignSelf: 'flex-end', padding: theme.spacing_4, backgroundColor: theme.yellow(1), borderRadius: theme.borderRadius, opacity: date_confirmed ? 1 : 0.1}}>
-            <Text style={[gstyles.caption_bold]}>Create</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row' }}>
+          <TouchableOpacity onPress={this.onCreate} disabled={!date_confirmed}>
+            <View style={{ padding: theme.spacing_4, backgroundColor: theme.red(1), borderRadius: theme.borderRadius, opacity: date_confirmed ? 1 : 0.1}}>
+              <Text style={[gstyles.caption_bold]}>Start Event</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{flex: 1}}/>
+          <Text style={[gstyles.caption_bold, gstyles.top_4, { color: theme.text(0.5), alignSelf: 'flex-end'}]}>
+            Ends {expiredDays <= 1 ? <Text style={{color: theme.text()}}>Today</Text> : <Text>in <Text style={{color: theme.text()}}>{expiredDays} days</Text></Text>}
+          </Text>
+        </View>
       </View>
     );
   }

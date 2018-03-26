@@ -23,7 +23,8 @@ class GroupItem extends Component {
         }}
       >
         {group.name && <Text>{group.name}</Text>}
-        {!group.name && <FlatList
+        {!group.name && <Text>{group.codename}</Text>}
+        {/* {!group.name && <FlatList
           horizontal
           keyExtractor={(item, i) => item._id}
           data={group.users}
@@ -33,7 +34,7 @@ class GroupItem extends Component {
           ItemSeparatorComponent={() => (
             <Text>, </Text>
           )}
-        />}
+        />} */}
       </View>
     );
   }

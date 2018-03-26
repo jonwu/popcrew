@@ -88,7 +88,7 @@ class PendingEventItem extends Component {
     const { invitation } = this.state;
     const pendingEvent = item.data;
     const status = invitation && invitation.status;
-    const expiredDays = moment.duration(moment(pendingEvent.expiration).diff(moment().startOf('day'))).asDays();
+    const expiredDays = moment.duration(moment(pendingEvent.expiration).startOf('day').diff(moment().startOf('day'))).asDays();
 
     return (
       <View
@@ -110,7 +110,7 @@ class PendingEventItem extends Component {
 
         {invitation && (
           <View style={{ alignItems: 'flex-start' }}>
-            {invitation.dates_options.map((date, i) => {
+            {pendingEvent.dates_options.map((date, i) => {
               const active = invitation.dates_accepted.includes(date);
               const formattedDate = moment(date).format('ddd, MMMM Do');
               return (

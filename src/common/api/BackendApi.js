@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const URL = 'http://192.168.86.90:3000';
+const URL = 'http://ec2-54-153-45-16.us-west-1.compute.amazonaws.com:3000';
+// const URL = 'http://192.168.86.90:3000';
 // const URL = 'http://localhost:3000';
 const instance = axios.create({ timeout: 10000, baseURL: URL });
 

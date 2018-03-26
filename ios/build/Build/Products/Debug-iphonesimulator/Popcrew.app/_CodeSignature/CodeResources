@@ -71,7 +71,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		4s/0wtza0B+skN9ZIXOMCdkCaTQ=
+		8oCpt3vRNaeB/AdFV2CDaYMLU8g=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -99,7 +99,7 @@
 		</data>
 		<key>PlugIns/PopcrewTests.xctest.dSYM/Contents/Resources/DWARF/PopcrewTests</key>
 		<data>
-		YuIzSUbIRGjDKEClW9b4EhxaiUE=
+		tiveIflkCNcSXvAKEMr/PKM9Cg0=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/Info.plist</key>
 		<data>
@@ -107,7 +107,7 @@
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/PopcrewTests</key>
 		<data>
-		8OeMvCNNRE3OWywLqQZWpGlbya4=
+		CZ0AXbF/mq1vlNu7g49gb6YAUTs=
 		</data>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -350,11 +350,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YuIzSUbIRGjDKEClW9b4EhxaiUE=
+			tiveIflkCNcSXvAKEMr/PKM9Cg0=
 			</data>
 			<key>hash2</key>
 			<data>
-			85i9Hjs3RdDIoWApIObKWeUg5J3BdsntObqazQ5C0RA=
+			2NFurKmbfQmkLsNoNQYTrkHhjAUvqMx5dvteuCHOBtk=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/Info.plist</key>
@@ -372,11 +372,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8OeMvCNNRE3OWywLqQZWpGlbya4=
+			CZ0AXbF/mq1vlNu7g49gb6YAUTs=
 			</data>
 			<key>hash2</key>
 			<data>
-			wtT0J5j8WlZjyA8iB+l8fj1MXshT8/luKKBr5pMFQyY=
+			C6FhThzNtl9jqtP1rVGYbyz6Ucp0d6QT8iyWQmoQhso=
 			</data>
 		</dict>
 		<key>PlugIns/PopcrewTests.xctest/_CodeSignature/CodeResources</key>
