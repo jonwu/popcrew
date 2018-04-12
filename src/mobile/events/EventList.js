@@ -17,12 +17,12 @@ class EventList extends Component {
     const { gstyles, theme, styles, events } = this.props;
     return (
       <FlatList
-        // data={[{ key: 'Play Basketball', bg: theme.red() }, { key: 'Boardgame Night!!', bg: theme.blue() }]}
+        style={{ paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_2 }}
+        contentContainerStyle={{ paddingBottom: theme.spacing_2 }}
         data={events}
-        numColumns={2}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item, index }) => <EventItem item={item} index={index}/>}
-        ItemSeparatorComponent={() => <View style={{height: theme.spacing_2}}/>}
+        keyExtractor={item => item._id}
+        renderItem={({ item, index }) => <EventItem item={item} index={index} />}
+        ItemSeparatorComponent={() => <View style={{ height: theme.spacing_2 }} />}
       />
     );
   }

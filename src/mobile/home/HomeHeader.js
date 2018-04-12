@@ -18,7 +18,7 @@ class HomeHeader extends Component {
     const { gstyles, theme, styles } = this.props;
     return (
 
-      <View style={[{alignItems: 'center', justifyContent: 'center', marginTop: theme.spacing_1}]}>
+      <View style={[{alignItems: 'center', justifyContent: 'center', marginTop: theme.spacing_1, marginBottom: theme.spacing_1}]}>
         <TouchableOpacity
           onPress={Actions.createEventStep1}
         >

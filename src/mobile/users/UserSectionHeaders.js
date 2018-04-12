@@ -5,35 +5,51 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import { Actions } from 'react-native-router-flux';
 function generateStyles(theme) {
-  return {}
+  return {};
 }
 class UserSectionHeaders extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles, section } = this.props;
+    const { gstyles, theme, styles, section, user } = this.props;
+    let content = null;
     switch (section.title) {
       case 'friends':
-        return (
-          <View style={{flexDirection: 'row'}}>
-            <Text>Friends</Text>
+        content = (
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={gstyles.p1}>Friends</Text>
           </View>
         );
+        break;
       case 'groups':
-        return (
-          <View style={{flexDirection: 'row'}}>
-            <Text>Crew</Text>
-            <View style={{flex: 1}}></View>
-            <TouchableOpacity onPress={Actions.createGroup}>
-              <Text>+ Create a Crew</Text>
-            </TouchableOpacity>
+        content = (
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={gstyles.p1}>Crew</Text>
+            <View style={{ flex: 1 }} />
+            {user.username === 'jonwu' && (
+              <TouchableOpacity onPress={Actions.createGroup}>
+                <Text style={gstyles.p1}>+ Create a Crew</Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
+        break;
       default:
-        return null;
+        break;
     }
-
+    return (
+      <View
+        style={{
+          marginLeft: theme.spacing_2,
+          marginRight: theme.spacing_2,
+          marginBottom: theme.spacing_4,
+          marginTop: theme.spacing_2,
+        }}
+      >
+        {content}
+      </View>
+    );
   }
 }
 
@@ -43,9 +59,8 @@ function mapStateToProps(state, ownProps) {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
+    user: state.settings.user,
   };
 }
 
-export default connect(
-  mapStateToProps,
-)(UserSectionHeaders);
+export default connect(mapStateToProps)(UserSectionHeaders);

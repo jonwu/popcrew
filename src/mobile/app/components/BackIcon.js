@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../utils/selectors';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Actions } from 'react-native-router-flux';
 
 function generateStyles(theme) {
   return {}
 }
-class Loader extends Component {
+class BackIcon extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { loader, onError } = this.props;
-    if (loader.isRequesting) return null;
-    if (loader.isReceived) return this.props.children;
-    if (loader.error && onError) return onError(loader.error);
-    return null;
+    const { gstyles, theme, styles } = this.props;
+    return (
+      <TouchableOpacity onPress={Actions.home}>
+        <View
+          style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon name="ios-arrow-back" size={30} color={theme.text()} />
+        </View>
+      </TouchableOpacity>
+    );
   }
 }
 
@@ -31,4 +38,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-)(Loader);
+)(BackIcon);

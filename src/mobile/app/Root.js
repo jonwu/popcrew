@@ -35,12 +35,10 @@ class Root extends Component {
             inactiveBackgroundColor={theme.bg()}
             tabStyle={{ marginTop: -1 }}
           >
-            <Stack key="homeTab" title="home" icon={TabIcon}>
-              <Scene key="home" component={Home} hideNavBar/>
-            </Stack>
-            <Stack key="eventsTab" title="events" icon={TabIcon}>
-              <Scene key="events" component={Events} hideNavBar/>
-            </Stack>
+
+            <Scene key="home" title="home" component={Home} icon={TabIcon} hideNavBar/>
+            <Scene key="events" title="events" component={Events} icon={TabIcon} hideNavBar/>
+
             {/* <Stack key="invitationsTab" title="invitations" icon={TabIcon}>
               <Scene key="invitations" component={Invitations} hideNavBar/>
             </Stack> */}

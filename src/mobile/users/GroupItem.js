@@ -13,6 +13,7 @@ class GroupItem extends Component {
   }
   render() {
     const { gstyles, theme, styles, group } = this.props;
+    console.log(group.codename);
     return (
       <View
         style={{
@@ -22,8 +23,8 @@ class GroupItem extends Component {
           alignItems: 'center',
         }}
       >
-        {group.name && <Text>{group.name}</Text>}
-        {!group.name && <Text>{group.codename}</Text>}
+        {group.name && <Text style={gstyles.p1}>{group.name}</Text>}
+        {!group.name && <Text style={gstyles.p1}>{group.codename}</Text>}
         {/* {!group.name && <FlatList
           horizontal
           keyExtractor={(item, i) => item._id}

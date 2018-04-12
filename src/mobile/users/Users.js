@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import UserList from './UserList';
-import { Navigator } from '../app/components';
+import { Navigator, BackIcon } from '../app/components';
 
 function generateStyles(theme) {
   return {}
@@ -16,8 +16,10 @@ class Users extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <View style={{flex: 1}}>
-        <Navigator />
+      <View style={{flex: 1, backgroundColor: theme.bg() }}>
+        <Navigator
+          renderLeft={() => <BackIcon/>}
+        />
         <UserList />
       </View>
     );

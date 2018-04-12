@@ -37,6 +37,7 @@ class UserList extends Component {
         ]}
         keyExtractor={(item) => item._id}
         stickySectionHeadersEnabled={false}
+        ItemSeparatorComponent={() => <View style={[{height: theme.borderWidth, backgroundColor: theme.light(0.9) }, gstyles.left_2, gstyles.right_2]}/>}
       />
     );
   }

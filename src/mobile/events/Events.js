@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
-import { Loader } from '../app/components';
+import { Loader, Navigator } from '../app/components';
 import EventList from './EventList';
-import { initActiveEvents } from '../../common/app/actions';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 function generateStyles(theme) {
   return {}
@@ -15,13 +16,18 @@ class Events extends Component {
     super(props);
   }
   componentDidMount() {
-    const { user, initActiveEvents } = this.props;
-    initActiveEvents({ userId: user._id });
+    const { user } = this.props;
+
   }
   render() {
     const { gstyles, theme, styles, loaderInitActiveEvents } = this.props;
     return (
-      <View style={{ flex: 1, backgroundColor: theme.bg(), paddingHorizontal: theme.spacing_2, paddingTop: theme.spacing_1 }}>
+      <View style={{ flex: 1, backgroundColor: theme.bg() }}>
+        <Navigator renderLeft={() => <TouchableOpacity onPress={Actions.users}>
+          <View style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}>
+            <Icon name="md-people" size={30} color={theme.text()} />
+          </View>
+        </TouchableOpacity>}/>
         <Loader loader={loaderInitActiveEvents} >
           <EventList />
         </Loader>
@@ -43,5 +49,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { initActiveEvents }
 )(Events);

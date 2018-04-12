@@ -51,10 +51,12 @@ function pendingEvents(state = [], action) {
       return state;
   }
 }
-function invitations(state = [], action) {
+function invitations(state = {}, action) {
   switch (action.type) {
     case ActionTypes.UPDATE_INVITATIONS:
-      return action.invitations;
+      return Object.assign({}, state, {
+        [action.eventId]: action.invitations,
+      });
     default:
       return state;
   }

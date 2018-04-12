@@ -17,14 +17,22 @@ class EventList extends Component {
   componentDidMount() {}
   render() {
     const { gstyles, theme, styles, events } = this.props;
+    const transformedEvents = events.length % 2 !== 0 ? [...events, { _id: -1 }] : events;
     return (
       <FlatList
-        style={{paddingHorizontal: theme.spacing_2 }}
+        style={{ paddingHorizontal: theme.spacing_2 }}
         numColumns={2}
-        data={events}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item, index }) => <IdleEventItem item={item} index={index}/>}
-        ItemSeparatorComponent={() => <View style={{height: theme.spacing_2}}/>}
+        data={transformedEvents}
+        keyExtractor={item => item._id}
+        renderItem={({ item, index }) => <IdleEventItem item={item} index={index} />}
+        ItemSeparatorComponent={() => <View style={{ height: theme.spacing_2 }} />}
+        ListHeaderComponent={() => (
+          <View style={[gstyles.top_2, gstyles.bottom_2]}>
+            <Text style={gstyles.p1_bold}>
+              Pending Events <Text style={{ color: theme.text(0.5) }}>in no particular order</Text>
+            </Text>
+          </View>
+        )}
       />
     );
   }

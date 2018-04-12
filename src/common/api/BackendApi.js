@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const URL = 'http://ec2-54-153-45-16.us-west-1.compute.amazonaws.com:3000';
+// const URL = 'http://ec2-54-153-45-16.us-west-1.compute.amazonaws.com:3000';
 // const URL = 'http://192.168.86.90:3000';
-// const URL = 'http://localhost:3000';
+const URL = 'http://localhost:3000';
 const instance = axios.create({ timeout: 10000, baseURL: URL });
 
 
 instance.interceptors.request.use((i_config) => {
   if (process.env.NODE_ENV !== 'production') {
-    console.log(`\n(${i_config.method.toUpperCase()}) ${i_config.url} ${i_config.params ? JSON.stringify(i_config.params) : JSON.stringify(i_config.data)}`);
+    // console.log(`\n(${i_config.method.toUpperCase()}) ${i_config.url} ${i_config.params ? JSON.stringify(i_config.params) : JSON.stringify(i_config.data)}`);
   }
   return i_config;
 }, (error) => {

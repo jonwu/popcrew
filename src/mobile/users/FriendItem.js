@@ -12,18 +12,24 @@ class FriendItem extends Component {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles, user } = this.props;
+    const { gstyles, theme, styles, user, light_gstyles, light_theme } = this.props;
     return (
       <View
-        style={{
+        style={[{
           flexDirection: 'row',
-          height: 48,
-          paddingHorizontal: theme.spacing_2,
+          height: 52,
           alignItems: 'center',
-        }}
+          paddingHorizontal: theme.spacing_3,
+          backgroundColor: 'white',
+          borderLeftWidth: theme.borderWidth,
+          borderRightWidth: theme.borderWidth,
+          borderColor: theme.borderColor,
+        }, gstyles.left_2, gstyles.right_2]}
       >
-        <Text>User: {user.username}</Text>
-        
+        <View>
+          <Text style={light_gstyles.p1_bold}>{user.username}</Text>
+          <Text style={[light_gstyles.caption_bold, { color: light_theme.text(0.5) }]}>{user.firstname} {user.lastname}</Text>
+        </View>
       </View>
     );
   }
@@ -34,6 +40,8 @@ function mapStateToProps(state, ownProps) {
   return {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
+    light_gstyles: state.settings.light_gstyles,
+    light_theme: state.settings.light_theme,
     styles: stylesSelector(state.settings.theme),
   };
 }

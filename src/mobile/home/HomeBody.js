@@ -17,13 +17,14 @@ class HomeBody extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <ScrollView>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <HomeHeader />
         <FeedList />
-        <View style={gstyles.top_2}>
+        {/* <View>
+          <View style={{backgroundColor: theme.borderColor, height: theme.borderWidth }}/>
           <IdleEventList />
-        </View>
-      </ScrollView>
+        </View> */}
+      </View>
     );
   }
 }

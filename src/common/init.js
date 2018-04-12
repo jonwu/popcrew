@@ -7,12 +7,4 @@ export default function init(store) {
   const getState = store.getState;
   dispatch(initUsers());
   dispatch(initGroups());
-
-  if (getState().settings.user) {
-    const initFeedItems = Promise.all([
-      dispatch(initFeedEvents()),
-      dispatch(initIdleEvents()),
-    ]);
-    dispatch(load('init_feed_items', initFeedItems));
-  }
 }

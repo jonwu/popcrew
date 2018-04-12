@@ -13,10 +13,10 @@ function generateStyles(theme) {
   return {}
 }
 function UserItem(props) {
-  const { gstyles, theme, user } = props;
+  const { gstyles, theme, user, itemStyle } = props;
   return (
     <View
-      style={{
+      style={[{
         height: ITEM_WIDTH,
         width: ITEM_WIDTH,
         borderRadius: ITEM_WIDTH/2,
@@ -24,7 +24,7 @@ function UserItem(props) {
         justifyContent: 'center',
         backgroundColor: theme.bg2(),
         marginRight: theme.spacing_5,
-      }}
+      }, itemStyle]}
     >
       <Text style={[gstyles.caption_bold, { color: theme.text() }]}>{`${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`}</Text>
     </View>
@@ -32,11 +32,11 @@ function UserItem(props) {
 }
 class EventEventUserList extends Component {
   render() {
-    const { gstyles, theme, users } = this.props;
+    const { gstyles, theme, users, itemStyle } = this.props;
     const userItems = []
     const userLength = users.length < N_ITEMS ? users.length : N_ITEMS;
     for(let i = 0; i < userLength; i++ ) {
-      userItems.push(<UserItem key={i} user={users[i]} {...this.props}/>)
+      userItems.push(<UserItem key={i} user={users[i]} {...this.props} />)
     }
     return (
       <View style={{ flexDirection: 'row' }}>

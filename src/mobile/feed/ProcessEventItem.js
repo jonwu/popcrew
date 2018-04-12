@@ -7,6 +7,8 @@ import EventUserList from '../users/EventUserList';
 import { CheckBox } from '../app/components';
 import moment from 'moment';
 import BackendAPI from '../../common/api/BackendApi';
+import { initialize } from '../../common/app/actions';
+import { Actions } from 'react-native-router-flux';
 
 function generateStyles(theme) {
   return {}
@@ -20,12 +22,13 @@ class ProcessEventItem extends Component {
     this.onCreate = this.onCreate.bind(this);
   }
   onCreate() {
-    const { item } = this.props;
+    const { item, initialize } = this.props;
     const { date_confirmed } = this.state;
     const processingEvent = item.data;
     const params = { status: 'active', date_confirmed };
     BackendAPI.patchEvent(processingEvent._id, params).then(event => {
-      console.log(event)
+      initialize();
+      Actions.eventsTab();
     });
   }
   render() {
@@ -44,6 +47,9 @@ class ProcessEventItem extends Component {
         <Text style={[gstyles.h4_bold, gstyles.bottom_5, { color: theme.text() }]}>
           {processingEvent.name}
         </Text>
+        <Text style={[gstyles.caption_bold, gstyles.bottom_4, { color: theme.text(0.5) }]}>
+          Everyone accepted!
+        </Text>
         <EventUserList users={processingEvent.users} />
         <View style={{flex: 1}}/>
         <View style={{alignItems: 'flex-start'}}>
@@ -59,13 +65,12 @@ class ProcessEventItem extends Component {
             );
           })}
         </View>
-        <View style={{flexDirection: 'row' }}>
+        <View style={[{alignItems: 'flex-end'}, gstyles.top_2]}>
           <TouchableOpacity onPress={this.onCreate} disabled={!date_confirmed}>
             <View style={{ padding: theme.spacing_4, backgroundColor: theme.red(1), borderRadius: theme.borderRadius, opacity: date_confirmed ? 1 : 0.1}}>
-              <Text style={[gstyles.caption_bold]}>Start Event</Text>
+              <Text style={[gstyles.p1_bold]}>Confirm!</Text>
             </View>
           </TouchableOpacity>
-          <View style={{flex: 1}}/>
           <Text style={[gstyles.caption_bold, gstyles.top_4, { color: theme.text(0.5), alignSelf: 'flex-end'}]}>
             Ends {expiredDays <= 1 ? <Text style={{color: theme.text()}}>Today</Text> : <Text>in <Text style={{color: theme.text()}}>{expiredDays} days</Text></Text>}
           </Text>
@@ -86,4 +91,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
+  { initialize }
 )(ProcessEventItem);

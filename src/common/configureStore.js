@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 import rootReducer from './reducers';
 import collections from './utils/themes';
 import gstyles from './utils/gstyles';
+import middleware from './middleware';
 
 const transform = createTransform(
   (inboundState, key) => {
@@ -35,12 +36,11 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const enhancer = composeWithDevTools(applyMiddleware(thunk));
+const enhancer = composeWithDevTools(applyMiddleware(thunk, middleware));
 
 export default initialState => {
   let store = createStore(persistedReducer, initialState, enhancer);
   let persistor = persistStore(store);
-  // persistor.purge();
+  persistor.purge();
   return { store, persistor };
 };

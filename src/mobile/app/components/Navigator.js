@@ -37,7 +37,7 @@ class Navigator extends Component {
       >
           {renderLeft && renderLeft()}
           <View style={{ flex: 1 }} />
-          <Text style={[styles.p1]}>{title}</Text>
+          <Text style={[gstyles.p1]}>{title}</Text>
           <View style={{ flex: 1 }} />
           {renderRight && renderRight()}
         </View>

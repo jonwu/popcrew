@@ -21,7 +21,6 @@ class FeedList extends Component {
   renderItem({ item, index }) {
     const { gstyles, theme, styles} = this.props;
     let content = null;
-    console.log(item.type)
     switch(item.type) {
       case 'pending_event':
         content = <PendingEventItem item={item} index={index}/>
@@ -45,9 +44,9 @@ class FeedList extends Component {
   render() {
     const { gstyles, theme, styles, events, light_theme, loaderInitFeedItems, feedEventItems} = this.props;
     const feedItems = [...feedEventItems];
-    console.log(feedEventItems)
+    if (!feedItems.length) return null;
     return (
-      <View style={[{ paddingVertical: theme.spacing_2, backgroundColor: theme.bg2()}, gstyles.top_2]}>
+      <View style={[{ height: 360 + theme.spacing_2 * 2, paddingVertical: theme.spacing_2, backgroundColor: theme.bg2()}]}>
         <Carousel
           style={{paddingTop: theme.spacing_2}}
           data={feedItems}

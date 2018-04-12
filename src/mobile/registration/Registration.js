@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Text,
+  Keyboard,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
@@ -8,25 +15,32 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 
 function generateStyles(theme) {
-  return {}
+  return {};
 }
 class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isSignUp: true,
-    }
+    };
   }
   render() {
     const { gstyles, theme, styles } = this.props;
     const { isSignUp } = this.state;
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        {isSignUp ? <SignUp/> : <SignIn/>}
-        <TouchableOpacity onPress={() => this.setState({isSignUp: !this.state.isSignUp})}>
-          <Text>{isSignUp ? "Got an account? Sign in" : "Go back to sign up"}</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={{ flex: 1, paddingTop: theme.spacing_1 * 2, backgroundColor: theme.bg() }}>
+          {isSignUp ? <SignUp /> : <SignIn />}
+          <TouchableOpacity
+            style={{ alignSelf: 'center' }}
+            onPress={() => this.setState({ isSignUp: !this.state.isSignUp })}
+          >
+            <Text style={gstyles.p1}>
+              {isSignUp ? 'Have an account already? Sign in' : 'Return to sign up'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -40,6 +54,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-)(Registration);
+export default connect(mapStateToProps)(Registration);
