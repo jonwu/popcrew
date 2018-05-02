@@ -16,7 +16,7 @@ class BackIcon extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <TouchableOpacity onPress={Actions.home}>
+      <TouchableOpacity onPress={Actions.pop}>
         <View
           style={{ paddingHorizontal: 16, alignItems: 'center', justifyContent: 'center' }}
         >

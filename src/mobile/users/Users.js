@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
@@ -14,13 +14,14 @@ class Users extends Component {
     super(props);
   }
   render() {
-    const { gstyles, theme, styles } = this.props;
+    const { gstyles, theme, styles, pnToken } = this.props;
     return (
       <View style={{flex: 1, backgroundColor: theme.bg() }}>
         <Navigator
           renderLeft={() => <BackIcon/>}
         />
         <UserList />
+        {pnToken && <Text style={[gstyles.p1, { color: theme.text() }]}>PN Token: {pnToken.token}</Text>}
       </View>
     );
   }
@@ -32,6 +33,7 @@ function mapStateToProps(state, ownProps) {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
     styles: stylesSelector(state.settings.theme),
+    pnToken: state.settings.pnToken,
   };
 }
 

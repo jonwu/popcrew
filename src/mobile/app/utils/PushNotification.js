@@ -1,10 +1,11 @@
+import { PushNotificationIOS } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { savePnToken } from '../../../common/app/actions';
 
 export function init(store) {
   const dispatch = store.dispatch;
   const getState = store.getState;
-  
+
   PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: function(token) {
