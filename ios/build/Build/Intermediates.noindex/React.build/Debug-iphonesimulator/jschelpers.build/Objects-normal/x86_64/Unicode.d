@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Jonathan/Documents/Popcrew/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
-  /Users/Jonathan/Documents/Popcrew/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
+  /Users/jonathan/Documents/react-projects/popcrew/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
+  /Users/jonathan/Documents/react-projects/popcrew/node_modules/react-native/ReactCommon/jschelpers/Unicode.h

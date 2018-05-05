@@ -1,2 +1,3 @@
-dependencies: /Users/Jonathan/Documents/Popcrew/ios/PlanIt/main.m \
-  /Users/Jonathan/Documents/Popcrew/ios/PlanIt/AppDelegate.h
+dependencies: \
+  /Users/jonathan/Documents/react-projects/popcrew/ios/PlanIt/main.m \
+  /Users/jonathan/Documents/react-projects/popcrew/ios/PlanIt/AppDelegate.h

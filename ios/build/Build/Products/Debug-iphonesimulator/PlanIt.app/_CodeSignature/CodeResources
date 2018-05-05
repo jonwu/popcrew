@@ -38,11 +38,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		1p22cSNIPUFM+KDRj0QfpwFMzoI=
+		hFGjLn3CV5IE1YFTRM+Uu/QEsCo=
 		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		8RLDaPnBli0vz1z0i8kQg6Z13fM=
+		xg6jdnctJ9OfrACH89687P6Qwfk=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -107,7 +107,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		1bbkeWtzoaHOSInKgyisfb+QY4w=
+		EX4BmCJlRA05+HUTAuF7tnshlp4=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -115,7 +115,7 @@
 		</data>
 		<key>MaterialCommunityIcons.ttf</key>
 		<data>
-		qsYaaEAlreJgw0cwmpP4T0ugnSE=
+		LlRFFQPKQ8n7uDUD5LZhbhx4DRE=
 		</data>
 		<key>MaterialIcons.ttf</key>
 		<data>
@@ -123,7 +123,7 @@
 		</data>
 		<key>Octicons.ttf</key>
 		<data>
-		43wPh5FmspBv+00q8kJl9AIbRBc=
+		+YreAPYbFuBieFv6gKSQafXjk7M=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -252,22 +252,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1p22cSNIPUFM+KDRj0QfpwFMzoI=
+			hFGjLn3CV5IE1YFTRM+Uu/QEsCo=
 			</data>
 			<key>hash2</key>
 			<data>
-			eMNT191aLHUCaSxyoqPxzi/PmVBGNRnOtOxG2WYoQqE=
+			xadtigSs9eOCDNtjfoHXST/Xpi6bHXk1G4beioJJXHg=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8RLDaPnBli0vz1z0i8kQg6Z13fM=
+			xg6jdnctJ9OfrACH89687P6Qwfk=
 			</data>
 			<key>hash2</key>
 			<data>
-			p8kvDa+LRYLzGGpshoFmXYYM3zuyXW1Cj4waS55IFXs=
+			YbSjZlfWVZixG4TPH6sfLcaXyoSOFk6RJEu7IpE8BKw=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -441,11 +441,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qsYaaEAlreJgw0cwmpP4T0ugnSE=
+			LlRFFQPKQ8n7uDUD5LZhbhx4DRE=
 			</data>
 			<key>hash2</key>
 			<data>
-			q9ds9276vErG0wDQjAHtvPQadpxhrJDfPQ8UGJDid2g=
+			hvzI5Ll2LOfABnIPjqOG8YBKGtVVv2xJ+8XfCHVI35c=
 			</data>
 		</dict>
 		<key>MaterialIcons.ttf</key>
@@ -463,11 +463,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			43wPh5FmspBv+00q8kJl9AIbRBc=
+			+YreAPYbFuBieFv6gKSQafXjk7M=
 			</data>
 			<key>hash2</key>
 			<data>
-			IDC914RgQrcm7e1pDO4UjqugvZKBAae3xLoaLztAPMg=
+			NC9CWcIUkNdDyFv9XLIgM5voHcU7RU+sU2mnqmpBMI4=
 			</data>
 		</dict>
 		<key>PlugIns/PlanItTests.xctest.dSYM/Contents/Info.plist</key>
