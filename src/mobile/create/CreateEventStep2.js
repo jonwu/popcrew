@@ -8,6 +8,7 @@ import BackendAPI from '../../common/api/BackendApi';
 import { Actions } from 'react-native-router-flux';
 import { Navigator, BackIcon } from '../app/components';
 import UserSectionHeaders from '../users/UserSectionHeaders';
+import { initActiveEvents } from '../../common/app/actions';
 
 function generateStyles(theme) {
   return {};
@@ -112,7 +113,7 @@ class CreateEventStep2 extends Component {
     this.onShare = this.onShare.bind(this);
   }
   onShare() {
-    const { selectedOptions, text, groups, you, notifiedDaysBefore, duration } = this.props;
+    const { selectedOptions, text, groups, you, notifiedDaysBefore, duration, initActiveEvents } = this.props;
     const { selectedUserIds, selectedGroupIds } = this.state;
     const valid_days = selectedOptions.map(options => options.key).join(',');
     const filteredGroups = [...selectedGroupIds].map(selectedGroupId =>
@@ -140,8 +141,9 @@ class CreateEventStep2 extends Component {
       author: you._id,
     })
     .then(response => {
-      console.log(response.data)
-      Actions.home({ toast: `Added ${response.data.name}. You have ${response.data.idleEventsCount} crazy ideas waiting!` });
+      initActiveEvents().then(() => {
+        Actions.home({ toast: `Added ${response.data.name}`});
+      })
     })
     .catch(err => {
       Actions.home({ toast: `Encountered error. Please ping jonwu` });
@@ -231,4 +233,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(CreateEventStep2);
+export default connect(mapStateToProps, { initActiveEvents })(CreateEventStep2);
