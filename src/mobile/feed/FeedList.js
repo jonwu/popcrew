@@ -15,46 +15,40 @@ function generateStyles(theme) {
 class FeedList extends Component {
   constructor(props) {
     super(props);
-    this.renderItem = this.renderItem.bind(this);
+    this.state = {
+      currItemIndex: 0,
+      endReached: false,
+    };
+  }
+  iterateIndex = () => {
+    const { feedEventItems } = this.props;
+    const nextIndex = this.state.currItemIndex + 1;
+    if (nextIndex === feedEventItems.length) {
+      this.setState({
+        endReached: true,
+      })
+    } else {
+      this.setState({
+        currItemIndex: nextIndex,
+      })
+    }
   }
 
-  renderItem({ item, index }) {
-    const { gstyles, theme, styles} = this.props;
-    let content = null;
-    switch(item.type) {
-      case 'pending_event':
-        content = <PendingEventItem item={item} index={index}/>
-        break;
-      case 'processing_event':
-        content = <ProcessEventItem item={item} index={index} />
-        break;
-      default:
-        content = null;
-        break;
-    }
-    return (<View style={{
-      borderRadius: theme.borderRadius * 2,
-      overflow: 'hidden',
-      height: 360,
-      width: Dimensions.get('window').width * .75,
-    }}>
-      { content }
-    </View>)
-  }
   render() {
-    const { gstyles, theme, styles, events, light_theme, loaderInitFeedItems, feedEventItems} = this.props;
-    const feedItems = [...feedEventItems];
-    if (!feedItems.length) return null;
+    const {
+      gstyles,
+      theme,
+      styles,
+      events,
+      light_theme,
+      loaderInitFeedItem,
+      feedEventItems,
+    } = this.props;
+    const { currItemIndex, endReached } = this.state;
+    if (!feedEventItems.length || endReached ) return null;
     return (
-      <View style={[{ height: 360 + theme.spacing_2 * 2, paddingVertical: theme.spacing_2, backgroundColor: theme.bg2()}]}>
-        <Carousel
-          style={{paddingTop: theme.spacing_2}}
-          data={feedItems}
-          renderItem={this.renderItem}
-          sliderWidth={Dimensions.get('window').width}
-          itemWidth={Dimensions.get('window').width * .75}
-          itemHeight={360}
-        />
+      <View style={{ backgroundColor: theme.bg2(), padding: theme.spacing_2, flex: 1}}>
+        <PendingEventItem item={feedEventItems[currItemIndex]} iterateIndex={this.iterateIndex} />
       </View>
     );
   }

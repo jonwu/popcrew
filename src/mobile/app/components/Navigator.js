@@ -13,6 +13,7 @@ class Navigator extends Component {
   }
   render() {
     const { gstyles, theme, styles, title, renderLeft, renderRight } = this.props;
+    return null;
     return (
       <View>
         <StatusBar

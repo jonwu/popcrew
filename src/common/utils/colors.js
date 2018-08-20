@@ -7,3 +7,4 @@ export const GREEN = (opacity = 1.0) => `rgba(38, 194, 129, ${opacity})`;
 export const ORANGE = (opacity = 1.0) => `rgba(255, 155, 60, ${opacity})`;
 export const ONYX_SLATE = (opacity = 1.0) => `rgba(27, 40, 56, ${opacity})`;
 export const ONYX_EXTRA_SLATE = (opacity = 1.0) => `rgba(24, 35, 50, ${opacity})`;
+export const ROKA_SLATE = (opacity = 1.0) => `rgba(247, 247, 248, ${opacity})`

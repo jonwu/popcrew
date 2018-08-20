@@ -12,53 +12,43 @@ import CreateEventStep2 from '../create/CreateEventStep2';
 import CreateGroup from '../create/CreateGroup';
 import Registration from '../registration/Registration';
 import Events from '../events/Events';
-import Invitations from '../invitations/Invitations';
+import { createTabNavigator } from 'react-navigation';
 
-function generateStyles(theme) {
-  return {};
-}
+const computeDerivedRootNavigator = nextProps => {
+  return createTabNavigator(
+    {
+      Home: Home,
+      Settings: Events,
+    },
+    {
+      tabBarPosition: 'top',
+    },
+  );
+};
 class Root extends Component {
-  constructor(props) {
-    super(props);
+  state = {}
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("inside----")
+    if (prevState.theme !== nextProps.theme) {
+      const RootNavigator = computeDerivedRootNavigator(nextProps);
+      return {
+        RootNavigator,
+        theme: nextProps.theme,
+      };
+    }
   }
   render() {
     const { gstyles, theme, styles, user } = this.props;
-    return (
-      <Router>
-        <Stack key="root">
-          <Scene key="registration" component={Registration} onEnter={() => user && Actions.app()} hideNavBar/>
-          <Tabs
-            key="app"
-            swipeEnabled
-            showLabel={false}
-            activeBackgroundColor={theme.bg()}
-            inactiveBackgroundColor={theme.bg()}
-            tabStyle={{ marginTop: -1 }}
-          >
-
-            <Scene key="home" title="home" component={Home} icon={TabIcon} hideNavBar/>
-            <Scene key="events" title="events" component={Events} icon={TabIcon} hideNavBar/>
-
-            {/* <Stack key="invitationsTab" title="invitations" icon={TabIcon}>
-              <Scene key="invitations" component={Invitations} hideNavBar/>
-            </Stack> */}
-          </Tabs>
-          <Scene key="createEventStep1" component={CreateEventStep1} hideNavBar/>
-          <Scene key="createEventStep2" component={CreateEventStep2} hideNavBar/>
-          <Scene key="createGroup" component={CreateGroup} hideNavBar/>
-          <Scene key="users" component={Users} hideNavBar/>
-        </Stack>
-      </Router>
-    );
+    const { RootNavigator } = this.state;
+    return null;
   }
 }
 
-const stylesSelector = generateStylesSelector(generateStyles);
 function mapStateToProps(state, ownProps) {
   return {
     theme: state.settings.theme,
     gstyles: state.settings.gstyles,
-    styles: stylesSelector(state.settings.theme),
     user: state.settings.user,
   };
 }

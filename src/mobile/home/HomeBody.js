@@ -17,8 +17,8 @@ class HomeBody extends Component {
   render() {
     const { gstyles, theme, styles } = this.props;
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <HomeHeader />
+      <View style={{ flex: 1 }}>
+        {/* <HomeHeader /> */}
         <FeedList />
         {/* <View>
           <View style={{backgroundColor: theme.borderColor, height: theme.borderWidth }}/>

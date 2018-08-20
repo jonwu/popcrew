@@ -9,6 +9,7 @@ export function initialize() {
       dispatch(initFeedEvents()),
       dispatch(initIdleEvents()),
       dispatch(initActiveEvents()),
+      dispatch(initInvitations()),
     ]);
     dispatch(load('init_feed_items', initFeedItems));
   }

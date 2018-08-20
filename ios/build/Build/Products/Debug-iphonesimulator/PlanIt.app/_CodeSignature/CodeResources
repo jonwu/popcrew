@@ -38,7 +38,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		dP/lEl8aMTzN7dHq+tmf9Rz/lLM=
+		HJYyeZiRtjZDdAJ44INQsuN6ZpY=
 		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
@@ -135,19 +135,19 @@
 		</data>
 		<key>PlugIns/PlanItTests.xctest.dSYM/Contents/Resources/DWARF/PlanItTests</key>
 		<data>
-		ZdQKUjenVen6w5taIj2cpn8sX1U=
+		o1oFT4c3s8JWvXz9BpBINcp/Pgo=
 		</data>
 		<key>PlugIns/PlanItTests.xctest/Info.plist</key>
 		<data>
-		VYDsRpUZVwOurvGC9u8aCHS/Nys=
+		7wsCw0JJTgW3zrx3RMeLtqimSds=
 		</data>
 		<key>PlugIns/PlanItTests.xctest/PlanItTests</key>
 		<data>
-		pgaHE0ehQIoeXPOBKZjuP+pmQfE=
+		fAQAL/5zFBbukcMeZJgAmbewidk=
 		</data>
 		<key>PlugIns/PlanItTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
-		350Heqn+PZObS9iXsKsjTd2hV2c=
+		sHNYURNMhEp4sab5G/Hzl/tIRk4=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -252,11 +252,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dP/lEl8aMTzN7dHq+tmf9Rz/lLM=
+			HJYyeZiRtjZDdAJ44INQsuN6ZpY=
 			</data>
 			<key>hash2</key>
 			<data>
-			YwR0rw/9m/SLpUT+Dom7s/aMEDe/msGzbcKTJw+4psk=
+			RmUH1gMkKYOnGYZCAmWLDcE7jUjTplzl8zDi1FeLMj4=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
@@ -485,44 +485,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZdQKUjenVen6w5taIj2cpn8sX1U=
+			o1oFT4c3s8JWvXz9BpBINcp/Pgo=
 			</data>
 			<key>hash2</key>
 			<data>
-			8j6wbsdMuxXEllBW3yLBCQLGXGTm4RXXfwSbp9cwFbY=
+			P7yM0WwS3FX+InA9EL/Gi5WaB0X9/JjALAt5ODXpcDE=
 			</data>
 		</dict>
 		<key>PlugIns/PlanItTests.xctest/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VYDsRpUZVwOurvGC9u8aCHS/Nys=
+			7wsCw0JJTgW3zrx3RMeLtqimSds=
 			</data>
 			<key>hash2</key>
 			<data>
-			KzLdX1/4EtbXpaHM65qCrTA9eV+Z/hzAasCfCplp+nI=
+			Ju7VjPkmmY/gklbBUA9IUPjpyAiKtGUAfhrIMtGKtoc=
 			</data>
 		</dict>
 		<key>PlugIns/PlanItTests.xctest/PlanItTests</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pgaHE0ehQIoeXPOBKZjuP+pmQfE=
+			fAQAL/5zFBbukcMeZJgAmbewidk=
 			</data>
 			<key>hash2</key>
 			<data>
-			P7KoiIeY4JQfLnguqccOi7ujfeJnRv8EgfJbmEi5oQ4=
+			KscmHx1erBJUn54l/7DPsMoTUO+GHJ3/0lMaUdhg3CU=
 			</data>
 		</dict>
 		<key>PlugIns/PlanItTests.xctest/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			350Heqn+PZObS9iXsKsjTd2hV2c=
+			sHNYURNMhEp4sab5G/Hzl/tIRk4=
 			</data>
 			<key>hash2</key>
 			<data>
-			HLpnhREwlfSkjitXxf+uLfq2LM2DiTHvGP4LfFzXzSI=
+			jCmLD/KgMVZgMScZzwIT7Bcq+GUNItIF4/BklC+iGsk=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>

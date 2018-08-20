@@ -54,8 +54,8 @@ class API {
   getInvitations(params) {
     return instance.get(`/invitations`, { params });
   }
-  patchInvitation(invitationId, params) {
-    return instance.patch(`/invitations/${invitationId}`,params);
+  patchInvitation(params) {
+    return instance.patch(`/invitations`, params);
   }
 
 }

@@ -7,7 +7,7 @@ const middleware = store => next => action => {
   const nextState = store.getState();
   const dispatch = store.dispatch;
 
-  if(currState.settings.user !== nextState.settings.user) {
+  if(nextState.settings.user && currState.settings.user !== nextState.settings.user) {
     dispatch(initialize());
   }
 }

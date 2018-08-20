@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
 import Dimensions from 'Dimensions';
 
-const ITEM_WIDTH = 40;
+const ITEM_WIDTH = 52;
 const OFFSET = 12;
 const N_ITEMS = Dimensions.get('window').width % (ITEM_WIDTH + OFFSET)
 
@@ -19,14 +19,14 @@ function UserItem(props) {
       style={[{
         height: ITEM_WIDTH,
         width: ITEM_WIDTH,
-        borderRadius: ITEM_WIDTH/2,
+        borderRadius: ITEM_WIDTH/ 10,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: theme.bg2(),
-        marginRight: theme.spacing_5,
+        backgroundColor: theme.dark(0.5),
+        marginRight: theme.spacing_2,
       }, itemStyle]}
     >
-      <Text style={[gstyles.caption_bold, { color: theme.text() }]}>{`${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`}</Text>
+      <Text style={[gstyles.p1_bold, { color: theme.text() }]}>{`${user.firstname[0].toUpperCase()}${user.lastname[0].toUpperCase()}`}</Text>
     </View>
   )
 }

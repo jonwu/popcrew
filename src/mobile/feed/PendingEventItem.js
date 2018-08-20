@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, FlatList, AppState } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { generateStylesSelector } from '../app/utils/selectors';
@@ -15,133 +15,178 @@ function generateStyles(theme) {
 class PendingEventItem extends Component {
   constructor(props) {
     super(props);
+    const { item } = props;
     this.state = {
-      invitation: null,
-      serverInvitation: null,
-      appState: AppState.currentState,
+      targetDate: this.transformDate(item.data.dates_options[0]),
+      expiration: this.transformDate(item.data.expiration),
     };
-    this.onInterested = this.onInterested.bind(this);
-    this.onAccepted = this.onAccepted.bind(this);
-    this.onRejected = this.onRejected.bind(this);
   }
-  componentDidMount() {
-    const { item, userId } = this.props;
-    const eventId = item.data._id;
-    AppState.addEventListener('change', this.handleAppStateChange);
-    BackendAPI.getInvitations({ user: userId, event: eventId }).then(response => {
-      const invitation = response.data.length > 0 && response.data[0];
-      this.setState({ invitation, serverInvitation: invitation });
-    });
-  }
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
-  }
-  handleAppStateChange = nextAppState => {
-    const { invitation, serverInvitation } = this.state;
-    if (this.state.appState.match(/inactive|active/) && nextAppState === 'background') {
-      if (
-        !_.isEqual(serverInvitation.dates_accepted, invitation.dates_accepted) ||
-        !_.isEqual(serverInvitation.status, invitation.status)
-      ) {
-        BackendAPI.patchInvitation(invitation._id, {
-          status: invitation.status,
-          dates_accepted: invitation.dates_accepted,
-        })
-          .then(response => {
-            this.setState({ serverInvitation: response.data });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.item !== this.props.item) {
+      this.setState({
+        targetDate: this.transformDate(nextProps.item.data.dates_options[0]),
+        expiration: this.transformDate(nextProps.item.data.expiration),
+      });
     }
-    this.setState({ appState: nextAppState });
+  }
+  onInterested = () => {
+    const { item, userId, iterateIndex } = this.props;
+    const params = {
+      user: userId,
+      event: item.data._id,
+      status: 'interested',
+    };
+    return BackendAPI.patchInvitation(params).then(response => {
+      console.log(response.data);
+      iterateIndex();
+    });
   };
-  onInterested() {
-    const { invitation } = this.state;
-    const updatedInvitation = Object.assign({}, invitation, {
-      status: invitation.status === 'interested' ? 'idle' : 'interested',
-    });
-    this.setState({ invitation: updatedInvitation });
-  }
-  onAccepted(date) {
-    const { invitation } = this.state;
-    const dates_accepted = invitation.dates_accepted.includes(date)
-      ? invitation.dates_accepted.filter(d => d !== date)
-      : [...invitation.dates_accepted, date];
-    const updatedInvitation = Object.assign({}, invitation, {
-      dates_accepted,
-      status: dates_accepted.length === 0 ? 'idle' : 'accepted',
-    });
-    this.setState({ invitation: updatedInvitation });
-  }
-  onRejected() {
-    const { invitation } = this.state;
-    const updatedInvitation = Object.assign({}, invitation, {
-      status: invitation.status === 'rejected' ? 'idle' : 'rejected',
-    });
-    this.setState({ invitation: updatedInvitation });
-  }
+  onAccepted = () => {
+    const { item, userId, iterateIndex } = this.props;
+    const params = {
+      user: userId,
+      event: item.data._id,
+      dates_accepted: [item.data.dates_options[0]],
+      status: 'accepted',
+    };
+    return BackendAPI.patchInvitation(params).then(iterateIndex);
+  };
+  onRejected = () => {
+    const { item, userId, iterateIndex } = this.props;
+    const params = {
+      user: userId,
+      event: item.data._id,
+      status: 'rejected',
+    };
+    return BackendAPI.patchInvitation(params).then(iterateIndex);
+  };
+  transformDate = date => {
+    const currDate = moment();
+    const targetDate = moment(date);
+    const tommorow = currDate.clone().add(1, 'days');
+    const nextSunday =
+      currDate.clone().isoWeekday() < 7
+        ? currDate.clone().isoWeekday(7)
+        : currDate
+            .clone()
+            .add(1, 'weeks')
+            .isoWeekday(7);
+    if (targetDate.isBefore(currDate, 'days')) return 'NVM';
+    if (targetDate.isSame(currDate, 'days')) return 'Today';
+    if (targetDate.isSame(tommorow, 'days')) return 'Tomorrow';
+    if (targetDate.isBefore(nextSunday, 'days')) return `${targetDate.format('dddd')}`;
+    if (targetDate.isSameOrAfter(nextSunday, 'days')) return `next ${targetDate.format('dddd')}`;
+    return targetDate.format('ddd, MMMM Do');
+  };
 
   render() {
     const { gstyles, theme, styles, item, index } = this.props;
-    const { invitation } = this.state;
+    const { invitation, targetDate, expiration } = this.state;
     const pendingEvent = item.data;
+
     const status = invitation && invitation.status;
-    const expiredDays = moment.duration(moment(pendingEvent.expiration).startOf('day').diff(moment().startOf('day'))).asDays();
+    const expiredDays = moment
+      .duration(
+        moment(pendingEvent.expiration)
+          .startOf('day')
+          .diff(moment().startOf('day')),
+      )
+      .asDays();
+    console.log(pendingEvent);
 
     return (
-      <View
-        style={{
-          backgroundColor: theme.bg(),
-          padding: theme.spacing_2,
-          flex: 1,
-        }}
-      >
-        <Text style={[gstyles.h4_bold, gstyles.bottom_5, { color: theme.text() }]}>
-          {pendingEvent.name}
-        </Text>
-        <Text style={[gstyles.caption_bold, gstyles.bottom_4, { color: theme.text(0.5) }]}>
-          Let us know when you're free.
-        </Text>
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            backgroundColor: theme.bg(),
+            // borderRadius: theme.borderRadius,
+            // border: `${theme.borderWidth}px solid ${theme.borderColor}`,
+            borderWidth: theme.borderWidth,
+            borderColor: theme.borderColor,
+            padding: theme.spacing_2,
+            flex: 1,
+          }}>
+          <Text style={[gstyles.h2_bold, { color: theme.text(0.5) }]}>Are you free</Text>
+          <Text style={[gstyles.h2_bold, { color: theme.text(0.5) }]}>
+            <Text style={{ color: theme.text() }}>{targetDate}</Text> for
+          </Text>
 
-        <EventUserList users={pendingEvent.users} />
-        <View style={{ flex: 1 }} />
+          <Text style={[gstyles.h2_bold, gstyles.top_1, { color: theme.text() }]}>
+            {item.data.name}?
+          </Text>
+          <View style={{height: theme.spacing_2}}/>
+          <EventUserList users={pendingEvent.users} />
+          <View style={{ flex: 1 }} />
 
-        {invitation && (
-          <View style={{ alignItems: 'flex-start' }}>
-            {pendingEvent.dates_options.map((date, i) => {
-              const active = invitation.dates_accepted.includes(date);
-              const formattedDate = moment(date).format('ddd, MMMM Do');
-              return (
-                <CheckBox
-                  onPress={() => this.onAccepted(date)}
-                  active={active}
-                  disabled={status !== 'idle' && status !== 'accepted'}
-                  key={i}
-                  text={formattedDate}
-                />
-              );
-            })}
-            <CheckBox
-              disabled={status === 'rejected'}
-              active={status === 'interested'}
-              onPress={this.onInterested}
-              activeColor={theme.red()}
-              text={'Interested, but busy'}
-            />
-            <CheckBox
-              disabled={status === 'interested'}
-              active={status === 'rejected'}
-              onPress={this.onRejected}
-              activeColor={theme.red()}
-              text={'Not Interested'}
-            />
-          </View>
-        )}
-        <Text style={[gstyles.caption_bold, gstyles.top_4, { color: theme.text(0.5), alignSelf: 'flex-end'}]}>
-          Ends {expiredDays <= 1 ? <Text style={{color: theme.text()}}>Today</Text> : <Text>in <Text style={{color: theme.text()}}>{expiredDays} days</Text></Text>}
-        </Text>
+          <Text
+            style={[gstyles.h4, gstyles.top_2, { color: theme.text(), alignSelf: 'center' }, gstyles.bottom_4]}>
+            Let me know by <Text style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}>{expiration}.</Text>
+          </Text>
+        </View>
+        <View
+          style={[
+            {
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: theme.spacing_2,
+            },
+            gstyles.top_2,
+          ]}>
+          <TouchableOpacity onPress={this.onAccepted}>
+            <View
+              style={{
+                height: 64,
+                width: 64,
+                borderRadius: 64,
+                backgroundColor: theme.green(),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={[gstyles.caption_bold, { color: theme.text() }]}>Yes</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onInterested}>
+            <View
+              style={{
+                height: 64,
+                width: 64,
+                borderRadius: 64,
+                backgroundColor: theme.red(),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={[gstyles.caption_bold, { color: theme.text() }]}>No</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onInterested}>
+            <View
+              style={{
+                height: 64,
+                width: 64,
+                borderRadius: 64,
+                backgroundColor: theme.blue(),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={[gstyles.caption_bold, { color: theme.text() }]}>Maybe</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onRejected}>
+            <View
+              style={{
+                height: 64,
+                width: 64,
+                borderRadius: 64,
+                backgroundColor: theme.yellow(),
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={[gstyles.caption_bold, { color: theme.text(), textAlign: 'center' }]}>
+                No Interest
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

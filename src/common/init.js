@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function init(store) {
   const dispatch = store.dispatch;
   const getState = store.getState;
+  console.log(getState());
   dispatch(initUsers());
   dispatch(initGroups());
 }
